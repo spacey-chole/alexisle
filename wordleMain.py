@@ -9,7 +9,7 @@ words = ['awful', 'clumpy', 'butts', 'coagulate', 'poopy',
          "jyang", "liang", "skyla", "adhoc", "antic",
          'color','blind', 'chole', 'chloe', 'cruel', 'vegan',
         'idaho', "Lplus", "ratio", "chaos", "farts",
-         "amoeba", "among", "edwin" ]
+         "amoeba", "among", "edwin"]
 
 while True:
     randInt = np.random.randint(0, len(words))

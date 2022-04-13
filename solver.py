@@ -1,9 +1,12 @@
-text_file = open("words.txt", "r")
-wordArray = text_file.read().split('\n')
+import pandas as pd
+import numpy as np
+
+text_file = pd.read_csv()
+wordArray = text_file.read().split(',')
 
 actualWord = "which" #testing with this word
 startingWord = "adieu"
-currGuess =  startingWord;
+currGuess = startingWord
 
 correctLetters = ["","","","",""]
 
