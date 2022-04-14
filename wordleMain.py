@@ -28,3 +28,20 @@ else:
     choiceWord = wordsReal[choiceIndex]
 
 print(choiceWord)
+
+guessWord = "_____"
+
+while (guessWord != choiceWord):
+    for char in guessWord:
+        print(char, end="")
+    print()
+    guessWord = input()
+    for i in len(guessWord):
+        if guessWord[i] == choiceWord[i]:
+            print(color.Fore.GREEN + i, end="")
+        elif (guessWord[i] in choiceWord):
+            print(color.Fore.YELLOW + i, end="")
+        else:
+            print(i, end="")
+        print()
+
