@@ -18,6 +18,15 @@ actualWord = "which"
 startingWord = "adieu"
 backupWord = "golly"
 currGuess = startingWord
+closestGuess = "00000"
+
+# guess apple
+# word is among
+# a - 0 1 2 3 4
+# b - 0 1 2 3 4 (etc)
+# so m would change to [0 2 3 4]
+# p change to [0 3 4]
+# l change to [0 1 2 4]
 
 correctLetters = ['','','','','']
 incorrectLetters = [[]]
