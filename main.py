@@ -1,16 +1,32 @@
-# This is a sample Python script.
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+import matplotlib.collections as coll
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+wid = 1
+hei = 1
+nrows = 7
+ncols = 6
+inbetween = 0.25
 
+xx = np.arange(0, ncols, (wid+inbetween))
+yy = np.arange(0, nrows, (hei+inbetween))
+fig = plt.figure(figsize=(6, 7.25))
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+ax = plt.subplot(111, aspect = 'equal')
+plt.xlim([-.25,6.25])
+plt.ylim([-0.25,7.5])
 
+pat = []
+for xi in xx:
+    for yi in yy:
+        sq = patches.Rectangle((xi, yi), wid, hei, fill=True)
+        ax.add_patch(sq)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+pc = coll.PatchCollection(pat)
+ax.add_collection(pc)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+plt.title("alexisle")
+plt.axis('off')
+plt.show()
+plt.savefig('test.png', dpi=90)
