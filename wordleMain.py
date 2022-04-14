@@ -14,6 +14,7 @@ words = ['awful', 'clumpy', 'butts', 'coagulate', 'poopy',
 
 wordsReal = pd.read_csv("Wordle.csv")
 wordsReal = wordsReal["validWordleAnswer"]
+wordsReal = wordsReal.dropna()
 print(wordsReal)
 
 choiceIndex = rd.randint(0, len(wordsReal))
