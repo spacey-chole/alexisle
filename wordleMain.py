@@ -1,6 +1,7 @@
 import numpy as np
-# import pandas as pd
-# import matplotlib.pyplot as plt
+import pandas as pd
+import matplotlib.pyplot as plt
+import random as rd
 
 # word list: awful, clumpy, butts, coagulant, poopy, cruel
 
@@ -11,9 +12,11 @@ words = ['awful', 'clumpy', 'butts', 'coagulate', 'poopy',
         'idaho', "Lplus", "ratio", "chaos", "farts",
          "amoeba", "among", "edwin"]
 
-while True:
-    randInt = np.random.randint(0, len(words))
-    print(words[randInt])
+wordsReal = pd.read_csv("Wordle.csv")
+
+choiceWord = wordsReal[rd.randint(0, len(wordsReal))]
+
+print(choiceWord)
 
 
 
