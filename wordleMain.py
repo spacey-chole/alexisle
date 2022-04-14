@@ -13,15 +13,10 @@ words = ['awful', 'clumpy', 'butts', 'coagulate', 'poopy',
          "amoeba", "among", "edwin"]
 
 wordsReal = pd.read_csv("Wordle.csv")
+wordsReal = wordsReal["validWordleAnswer"]
+print(wordsReal)
 
-choiceWord = wordsReal[rd.randint(0, len(wordsReal))]
+choiceIndex = rd.randint(0, len(wordsReal))
+choiceWord = wordsReal[choiceIndex]
 
 print(choiceWord)
-
-
-
-
-
-
-
-plt.show()
