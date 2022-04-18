@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import random as rd
-import colorama as color
+from colorama import Fore, Back, Style
 
 # Joke word or not to joke word
 funTime = False
@@ -55,9 +55,11 @@ while guessWord != choiceWord and numGuess < 5:
     # at the end, increment numGuess
     for i in guessWord:
         if i == choiceWord[guessWord.index(i)]:
-            print(color.Fore.GREEN + i, end="")
+            print(Fore.GREEN + i, end="")
+            print(Style.RESET_ALL)
         elif i in choiceWord:
-            print(color.Fore.YELLOW + i, end="")
+            print(Fore.YELLOW + i, end="")
+            print(Style.RESET_ALL)
         else:
             print(i, end="")
         print()
