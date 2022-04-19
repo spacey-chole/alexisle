@@ -14,8 +14,8 @@ yy = np.arange(0, nrows, (hei+inbetween))
 fig = plt.figure(figsize=(6, 7.25))
 
 ax = plt.subplot(111, aspect = 'equal')
-plt.xlim([-.25,6.25])
-plt.ylim([-0.25,7.5])
+plt.xlim([-.25, 6.25])
+plt.ylim([-0.25, 7.5])
 
 pat = []
 for xi in xx:
