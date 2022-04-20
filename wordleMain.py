@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import random as rd
 from colorama import Fore, Back, Style, init
+
 init(autoreset=True)
 
 # Joke word or not to joke word
@@ -28,20 +29,18 @@ validGuess = pd.read_csv("Wordle.csv")
 validGuess = validGuess["validWordleGuess"].dropna()
 
 # # selects a random index to use as the wordle word
-# choiceIndex = rd.randint(0, len(wordsReal))
-#
-# # If joke words, assigns the guessing word from the joke word list
-# # including the majestik møøse
-# # if normal, assign to choiceIndex of choice words
-# if funTime:
-#     choiceIndex = rd.randint(0, len(funWords))
-#     choiceWords = funWords[choiceIndex]
-# else:
-#     correctWord = wordsReal[choiceIndex]
-# A Møøse once bit my sister...
-correctWord = "mummy"
-print(correctWord)
+choiceIndex = rd.randint(0, len(wordsReal))
 
+# If joke words, assigns the guessing word from the joke word list
+# including the majestik møøse
+# if normal, assign to choiceIndex of choice words
+if funTime:
+    choiceIndex = rd.randint(0, len(funWords))
+    correctWord = funWords[choiceIndex]
+else:
+    correctWord = wordsReal[choiceIndex]
+
+# correctWord = "paddy"
 guessWord = "_____"
 
 # sets counter for guesses
@@ -63,7 +62,6 @@ while guessWord != correctWord and numGuess < 6:
     #     print("Not in word list")
     #     guessWord = input()
 
-
     correctLets = []
     for j in correctWord:
         correctLets.append(j)
@@ -83,7 +81,7 @@ while guessWord != correctWord and numGuess < 6:
             print("added ", i, " to greenIns")
 
     for i in range(5):
-        if correctLets.__contains__(i) and not greenIn.__contains__(guessWord[i]):
+        if correctLets.__contains__(guessWord[i]) and not greenIn.__contains__(guessWord[i]):
             correctLets.remove(guessWord[i])
             yellowIn.append(i)
             print("added ", i, " to yellowIns")
