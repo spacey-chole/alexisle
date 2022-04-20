@@ -31,14 +31,16 @@ validGuess = validGuess["validWordleGuess"].dropna()
 # choiceIndex = rd.randint(0, len(wordsReal))
 #
 # # If joke words, assigns the guessing word from the joke word list
+# # including the majestik møøse
 # # if normal, assign to choiceIndex of choice words
 # if funTime:
 #     choiceIndex = rd.randint(0, len(funWords))
 #     choiceWords = funWords[choiceIndex]
 # else:
-#     choiceWord = wordsReal[choiceIndex]
-choiceWord = "dummy"
-print(choiceWord)
+#     correctWord = wordsReal[choiceIndex]
+# A Møøse once bit my sister...
+correctWord = "mummy"
+print(correctWord)
 
 guessWord = "_____"
 
@@ -46,7 +48,8 @@ guessWord = "_____"
 numGuess = 0
 
 # while loop, iterates while the guess is wrong and numGuess is less than 5
-while guessWord != choiceWord and numGuess < 6:
+# No realli!
+while guessWord != correctWord and numGuess < 6:
     # prints out your guess word so far
     for char in guessWord:
         print(char, end="")
@@ -55,15 +58,15 @@ while guessWord != choiceWord and numGuess < 6:
     # sets guess-word to your input
     guessWord = input()
 
-    # # check if word is vamlid guess
+    # # check if word is valid guess
     # while guessWord not in validGuess and guessWord not in wordsReal:
     #     print("Not in word list")
     #     guessWord = input()
 
-    #
-    correctLet = []
-    for j in choiceWord:
-        correctLet.append(j)
+
+    correctLets = []
+    for j in correctWord:
+        correctLets.append(j)
 
     # checks guess, and prints in terminal if the letter is in the right spot (green),
     # if it is in the word but not in the right spot (yellow), or if the letter isn't in the word
@@ -73,23 +76,33 @@ while guessWord != choiceWord and numGuess < 6:
     greenIn = []
     yellowIn = []
 
-    # TODO put green check in seperate for loop to stop interference
+    for i in range(5):
+        if guessWord[i] == correctWord[i]:
+            correctLets.remove(guessWord[i])
+            greenIn.append(i)
+            print("added ", i, " to greenIns")
 
-    for i in guessWord:
-        if i == choiceWord[guessWord.index(i)]:
-            print(Back.GREEN + i, end="")
-            correctLet.remove(i)
-            greenIn.append(guessWord.index(i))
-        elif correctLet.__contains__(i):
-            print(Back.YELLOW + i, end="")
-            correctLet.remove(i)
+    for i in range(5):
+        if correctLets.__contains__(i) and not greenIn.__contains__(guessWord[i]):
+            correctLets.remove(guessWord[i])
+            yellowIn.append(i)
+            print("added ", i, " to yellowIns")
+
+    print(greenIn)
+    print(yellowIn)
+
+    for i in range(5):
+        if greenIn.__contains__(i):
+            print(Back.GREEN + guessWord[i], end=" ")
+        elif yellowIn.__contains__(i):
+            print(Back.YELLOW + guessWord[i], end=" ")
         else:
-            print(i, end="")
-        print()
+            print(guessWord[i], end=" ")
+
     numGuess += 1
 
 # output messages depending on result
-if guessWord == choiceWord:
+if guessWord == correctWord:
     print("You guessed the word")
 else:
-    print("The word was ", choiceWord)
+    print("The word was ", correctWord)
