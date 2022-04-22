@@ -47,6 +47,7 @@ def update_board():
 
     print(thing)
 
+
 pc = coll.PatchCollection(pat)
 ax.add_collection(pc)
 
