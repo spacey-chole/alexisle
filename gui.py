@@ -7,6 +7,8 @@ import matplotlib.collections as coll
 
 wid = 1
 hei = 1
+keywid = .2
+keyhei = .1
 nrows = 6
 ncols = 5
 inbetween = 0.25
