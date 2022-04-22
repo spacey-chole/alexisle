@@ -12,16 +12,44 @@ keyhei = .1
 nrows = 6
 ncols = 5
 inbetween = 0.25
-status = [["black","black","black","black","black"],
-          ["black","black","black","black","black"],
-          ["black","black","black","black","black"],
-          ["black","black","black","black","black"],
-          ["black","black","black","black","black"],
-          ["black","black","black","black","black"]]
+xx = np.arange(0, ncols + 1, (wid + inbetween))
+yy = np.arange(0, nrows + 1, (hei + inbetween))
+xkey = np.arange(0, 9, (keywid + inbetween))
+ykey = np.arange(0, 4, (keyhei + inbetween))
+fig = plt.figure(figsize=(10, 10))
 
-xx = np.arange(0, ncols + 1, (wid+inbetween))
-yy = np.arange(0, nrows + 1, (hei+inbetween))
-fig = plt.figure(figsize=(10,10))
+ax = plt.subplot(111, aspect='equal')
+plt.xlim([-10, 10])
+# plt.keyxlim([])
+plt.ylim([-10, 10])
+ax.text(3, 3, "hi", fontsize=20)
+
+pat = []
+status = [[]]
+keyboard = [[]]
+letters = [[]]
+
+
+def newgame():
+    status = [["black", "black", "black", "black", "black"],
+              ["black", "black", "black", "black", "black"],
+              ["black", "black", "black", "black", "black"],
+              ["black", "black", "black", "black", "black"],
+              ["black", "black", "black", "black", "black"],
+              ["black", "black", "black", "black", "black"]]
+    letters = [["", "", "", "", ""],
+               ["", "", "", "", ""],
+               ["", "", "", "", ""],
+               ["", "", "", "", ""],
+               ["", "", "", "", ""],
+               ["", "", "", "", ""]]
+    keyboard = [["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+                ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+                ["Z", "X", "C", "V", "B", "N", "M"]]
+
+    keystat = [["Grey", "Grey", "Grey", "Grey", "Grey","Grey", "Grey", "Grey", "Grey", "Grey"],
+               ["Grey", "Grey", "Grey", "Grey", "Grey", "Grey", "Grey", "Grey", "Grey"],
+               ["Grey", "Grey", "Grey", "Grey", "Grey", "Grey", "Grey"]]
 
 def update_board():
     # displaying colors
