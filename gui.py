@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.collections as coll
 
+# import keyboard as kbd
+
 wid = 1
 hei = 1
 nrows = 6
@@ -34,6 +36,6 @@ pc = coll.PatchCollection(pat)
 ax.add_collection(pc)
 
 plt.title("alexisle")
-plt.axis('off')
+# plt.axis('off')
 plt.show()
 plt.savefig('test.png', dpi=90)
