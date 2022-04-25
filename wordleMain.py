@@ -18,7 +18,7 @@ funWords = ['awful', 'clumpy', 'butts', 'coagulate', 'poopy',
             "jyang", "liang", "skyla", "adhoc", "antic",
             'color', 'blind', 'chole', 'color', 'blind', 'chloe', 'cruel', 'vegan',
             'idaho', "Lplus", "ratio", "chaos", "farts",
-            "amoeba", "among", "edwin", "dance"]
+            "amoeba", "among", "edwin", "dance", "david", "sussy"]
 
 # Reads csv file and assigns the column of potential words to an array of words
 wordsReal = pd.read_csv("Wordle.csv")
