@@ -28,10 +28,31 @@ plt.ylim([-10, 10])
 ax.text(3, 3, "hi", fontsize=20)
 
 pat = []
-status = [[]]
-keyboard = [[]]
-letters = [[]]
 
+# 2d array of the colors of each box, becuase the authors are too lazy to use OOP
+status = [["black", "black", "black", "black", "black"],
+          ["black", "black", "black", "black", "black"],
+          ["black", "black", "black", "black", "black"],
+          ["black", "black", "black", "black", "black"],
+          ["black", "black", "black", "black", "black"],
+          ["black", "black", "black", "black", "black"]]
+# 2d array of the guessed letters for each square
+letters = [["", "", "", "", ""],
+           ["", "", "", "", ""],
+           ["", "", "", "", ""],
+           ["", "", "", "", ""],
+           ["", "", "", "", ""],
+           ["", "", "", "", ""]]
+# qwerty keyboard 2d array
+keyboard = [["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+            ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+            ["Z", "X", "C", "V", "B", "N", "M"]]
+
+# status of all the keys on the keyboard, appearently the authors were too lazy to write out "LightGrey" 26 times
+grey = "LightGrey"
+keystat = [["Black", "Black", "Black", "Black", "Black", "Black", "Black", "Black", "Black", "Black"],
+           ["Black", "Black", "Black", "Black", "Black", "Black", "Black", "Black", "Black"],
+           ["Black", "Black", "Black", "Black", "Black", "Black", "Black"]]
 
 def newgame():
     status = [["black", "black", "black", "black", "black"],
@@ -54,27 +75,30 @@ def update_board(row, position, color, letter):
     # displaying colors
     for i in range(5):
         for j in range(6):
-            print(xx[i], yy[j])
-            sq = patches.Rectangle((xx[i], yy[j]), wid, hei, fill=True, color=status[i][j])
+            # print(xx[i], yy[j])
+            sq = patches.Rectangle((xx[i], yy[j]), wid, hei, fill=True, color=status[j][i])
             ax.add_patch(sq)
     # for i in range(5):
     # for j in range(6):
     # ax.text( 3, 3, letters,  fontsize=20)
 
     # display keyboard
-    num = len(keyboard[i])
-    thing = ""
-    for i in range(len(keyboard[i])):
-        for v in range(num - 1):
-            xkey = np.arange(0, num, (keywid + inbetween))
+    for j in range(0, 3):
+        for i in range(len(keyboard[j])):
+            xkey = np.arange((10 - len(keyboard[j])) / 2, 10 - (10 - len(keyboard[j])) / 2, (keywid + inbetween - .1))
+            sq = patches.Rectangle((xkey[i], ykey[j]), keywid, keyhei, fill=True, color=keystat[j][i])
+            ax.add_patch(sq)
 
-            thing += " "
-        # for j in range(i*2-1):
+    plt.show()
 
-        num -= 1;
-        sq = patches.Rectangle((xkey[i], ykey[j]), keywid, keyhei, fill=True, color="black")
+    # printing text on KEYBOARD
+    # for i in range(4):
+    # for j in range(len(keyboard[i])):
+    # ax.text(xkey[i], ykey[i], keyboard[i][j], color="yellow", fontsize = 10, horizontalalignment = 'center', verticalalignment='center')
 
-    print(thing)
+
+# pc = coll.PatchCollection(pat)
+# ax.add_collection(pc)
 
 # update_board(4, 1, "khaki", "G")
 update_board(4, 2, "black", "Y")
