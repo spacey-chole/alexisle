@@ -7,11 +7,18 @@ import matplotlib.collections as coll
 
 wid = 1
 hei = 1
-keywid = .2
-keyhei = .1
+
+keywid = .5
+keyhei = .8
+
+# number of rows and columns of squaresYes
 nrows = 6
 ncols = 5
+
+# distance between squares?
 inbetween = 0.25
+
+# Create lists of x/y coordinates from 0 to the number of columns+1, with a step size of the square width
 xx = np.arange(0, ncols + 1, (wid + inbetween))
 yy = np.arange(0, nrows + 1, (hei + inbetween))
 
@@ -21,12 +28,14 @@ ykey = np.arange(-3, 0, (keyhei + inbetween))
 # create figure for MatPlot
 fig = plt.figure(figsize=(10, 10))
 
+# create and set setlimits for plot
 ax = plt.subplot(111, aspect='equal')
 plt.xlim([-10, 10])
 # plt.keyxlim([])
 plt.ylim([-10, 10])
 ax.text(3, 3, "hi", fontsize=20)
 
+# what is this for?
 pat = []
 
 # 2d array of the colors of each box, becuase the authors are too lazy to use OOP
