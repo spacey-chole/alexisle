@@ -5,6 +5,9 @@ import matplotlib.collections as coll
 
 # import keyboard as kbd
 
+# https://stackoverflow.com/questions/44417945/creating-a-grid-of-squares-patches-in-matplotlib
+
+# width and height of squares?
 wid = 1
 hei = 1
 
@@ -30,10 +33,11 @@ fig = plt.figure(figsize=(10, 10))
 
 # create and set setlimits for plot
 ax = plt.subplot(111, aspect='equal')
-plt.xlim([-10, 10])
-# plt.keyxlim([])
-plt.ylim([-10, 10])
-ax.text(3, 3, "hi", fontsize=20)
+plt.xlim([-.75, 6.75])
+plt.ylim([- 3.25, 7.5])
+
+# HI PRACCY
+# ax.text(3, 3, "hi", fontsize=20)
 
 # what is this for?
 pat = []
@@ -63,22 +67,6 @@ keystat = [["Black", "Black", "Black", "Black", "Black", "Black", "Black", "Blac
            ["Black", "Black", "Black", "Black", "Black", "Black", "Black", "Black", "Black"],
            ["Black", "Black", "Black", "Black", "Black", "Black", "Black"]]
 
-def newgame():
-    status = [["black", "black", "black", "black", "black"],
-              ["black", "black", "black", "black", "black"],
-              ["black", "black", "black", "black", "black"],
-              ["black", "black", "black", "black", "black"],
-              ["black", "black", "black", "black", "black"],
-              ["black", "black", "black", "black", "black"]]
-    letters = [["", "", "", "", ""],
-               ["", "", "", "", ""],
-               ["", "", "", "", ""],
-               ["", "", "", "", ""],
-               ["", "", "", "", ""],
-               ["", "", "", "", ""]]
-    keyboard = [["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-                ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-                ["Z", "X", "C", "V", "B", "N", "M"]]
 
 def update_board(row, position, color, letter):
     # displaying colors
