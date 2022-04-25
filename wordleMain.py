@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import random as rd
 from colorama import Fore, Back, Style, init
 
+import gui
+
 init(autoreset=True)
 
 # Joke word or not to joke word
@@ -45,6 +47,12 @@ guessWord = "_____"
 
 # sets counter for guesses
 numGuess = 0
+
+
+# to show board at the beginning
+# gui.update_board(1, 1, "black", "g")
+# gui.show()
+
 
 # while loop, iterates while the guess is wrong and numGuess is less than 5
 # No realli!
@@ -91,13 +99,17 @@ while guessWord != correctWord and numGuess < 6:
 
     for i in range(5):
         if greenIn.__contains__(i):
+            gui.update_board(numGuess, i, "green", guessWord[i])
             print(Back.GREEN + guessWord[i], end=" ")
         elif yellowIn.__contains__(i):
+            gui.update_board(numGuess, i, "khaki", guessWord[i])
             print(Back.YELLOW + guessWord[i], end=" ")
         else:
+            gui.update_board(numGuess, i, "grey", guessWord[i])
             print(guessWord[i], end=" ")
 
     numGuess += 1
+    gui.show()
 
 # output messages depending on result
 if guessWord == correctWord:

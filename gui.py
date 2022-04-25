@@ -14,8 +14,11 @@ ncols = 5
 inbetween = 0.25
 xx = np.arange(0, ncols + 1, (wid + inbetween))
 yy = np.arange(0, nrows + 1, (hei + inbetween))
-xkey = np.arange(0, 9, (keywid + inbetween))
-ykey = np.arange(0, 4, (keyhei + inbetween))
+
+xkey = np.arange(0, 10, (keywid + inbetween - .1))
+ykey = np.arange(-3, 0, (keyhei + inbetween))
+
+# create figure for MatPlot
 fig = plt.figure(figsize=(10, 10))
 
 ax = plt.subplot(111, aspect='equal')
@@ -47,11 +50,7 @@ def newgame():
                 ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
                 ["Z", "X", "C", "V", "B", "N", "M"]]
 
-    keystat = [["Grey", "Grey", "Grey", "Grey", "Grey","Grey", "Grey", "Grey", "Grey", "Grey"],
-               ["Grey", "Grey", "Grey", "Grey", "Grey", "Grey", "Grey", "Grey", "Grey"],
-               ["Grey", "Grey", "Grey", "Grey", "Grey", "Grey", "Grey"]]
-
-def update_board():
+def update_board(row, position, color, letter):
     # displaying colors
     for i in range(5):
         for j in range(6):
@@ -77,9 +76,13 @@ def update_board():
 
     print(thing)
 
+# update_board(4, 1, "khaki", "G")
+update_board(4, 2, "black", "Y")
 
-pc = coll.PatchCollection(pat)
-ax.add_collection(pc)
+
+def show():
+    plt.show()
+
 
 plt.title("alexisle")
 # plt.axis('off')
