@@ -82,6 +82,8 @@ def newgame():
 
 def update_board(row, position, color, letter):
     # displaying colors
+    status[row][position] = color
+    letters[row][position] = letter
     for i in range(5):
         for j in range(6):
             # print(xx[i], yy[j])
@@ -89,7 +91,13 @@ def update_board(row, position, color, letter):
             ax.add_patch(sq)
     # for i in range(5):
     # for j in range(6):
-    # ax.text( 3, 3, letters,  fontsize=20)
+    # ax.text(3, 3, letters,  fontsize=20)
+
+    # display letters that user guessed
+    for i in range(0, 4):
+        for j in range(0, 5):
+            ax.text(xx[i] + wid / 2, yy[j] + hei / 2, letters[j][i], fontsize=30, horizontalalignment='center',
+                    verticalalignment='center')
 
     # display keyboard
     for j in range(0, 3):
