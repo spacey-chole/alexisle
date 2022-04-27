@@ -73,6 +73,7 @@ keystat = [["Black", "Black", "Black", "Black", "Black", "Black", "Black"],
 
 def update_board(row, position, color, letter):
     # displaying colors
+    print("updating")
     status[row][position] = color
     letters[row][position] = letter
     for i in range(5):
