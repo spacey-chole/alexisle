@@ -6,6 +6,9 @@ from colorama import Fore, Back, Style, init
 
 import gui
 
+gui.update_board(1, 1, "yellow", "g")
+gui.show()
+
 init(autoreset=True)
 
 # Joke word or not to joke word
@@ -50,8 +53,8 @@ numGuess = 0
 
 
 # to show board at the beginning
-# gui.update_board(1, 1, "black", "g")
-# gui.show()
+#gui.update_board(1, 1, "yellow", "g")
+#gui.show()
 
 
 # while loop, iterates while the guess is wrong and numGuess is less than 5
