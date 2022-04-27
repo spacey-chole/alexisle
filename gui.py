@@ -94,8 +94,10 @@ def update_board(row, position, color, letter):
             sq = patches.Rectangle((xkey[i], ykey[j]), keywid, keyhei, fill=True, color=keystat[j][i])
             ax.add_patch(sq)
 
-    plt.show()
+   # plt.show()
+    yield status
 
+plt.show()
     # printing text on KEYBOARD
     # for i in range(4):
     # for j in range(len(keyboard[i])):

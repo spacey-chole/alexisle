@@ -101,12 +101,15 @@ while guessWord != correctWord and numGuess < 6:
         if greenIn.__contains__(i):
             gui.update_board(numGuess, i, "green", guessWord[i])
             print(Back.GREEN + guessWord[i], end=" ")
+            gui.show()
         elif yellowIn.__contains__(i):
             gui.update_board(numGuess, i, "khaki", guessWord[i])
             print(Back.YELLOW + guessWord[i], end=" ")
+            gui.show()
         else:
             gui.update_board(numGuess, i, "grey", guessWord[i])
             print(guessWord[i], end=" ")
+            gui.show()
 
     numGuess += 1
     gui.show()
