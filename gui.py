@@ -20,12 +20,15 @@ ncols = 5
 
 # distance between squares?
 inbetween = 0.25
+keybetween = 0.05
 
 # Create lists of x/y coordinates from 0 to the number of columns+1, with a step size of the square width
 xx = np.arange(0, ncols + 1, (wid + inbetween))
 yy = np.arange(0, nrows + 1, (hei + inbetween))
 
-xkey = np.arange(0, 10, (keywid + inbetween - .1))
+width = xx[4] + wid
+
+xkey = np.arange(0, 10, (keywid + inbetween))
 ykey = np.arange(-3, 0, (keyhei + inbetween))
 
 # create figure for MatPlot
@@ -57,15 +60,15 @@ letters = [["", "", "", "", ""],
            ["", "", "", "", ""],
            ["", "", "", "", ""]]
 # qwerty keyboard 2d array
-keyboard = [["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+keyboard = [["Z", "X", "C", "V", "B", "N", "M"],
             ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-            ["Z", "X", "C", "V", "B", "N", "M"]]
+            ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]]
 
 # status of all the keys on the keyboard, appearently the authors were too lazy to write out "LightGrey" 26 times
 grey = "LightGrey"
-keystat = [["Black", "Black", "Black", "Black", "Black", "Black", "Black", "Black", "Black", "Black"],
+keystat = [["Black", "Black", "Black", "Black", "Black", "Black", "Black"],
            ["Black", "Black", "Black", "Black", "Black", "Black", "Black", "Black", "Black"],
-           ["Black", "Black", "Black", "Black", "Black", "Black", "Black"]]
+           ["Black", "Black", "Black", "Black", "Black", "Black", "Black", "Black", "Black", "Black"]]
 
 
 def update_board(row, position, color, letter):
@@ -90,7 +93,7 @@ def update_board(row, position, color, letter):
     # display keyboard
     for j in range(0, 3):
         for i in range(len(keyboard[j])):
-            xkey = np.arange((10 - len(keyboard[j])) / 2, 10 - (10 - len(keyboard[j])) / 2, (keywid + inbetween - .1))
+            xkey = np.arange(0, width, len(keyboard[j])+keybetween)
             sq = patches.Rectangle((xkey[i], ykey[j]), keywid, keyhei, fill=True, color=keystat[j][i])
             ax.add_patch(sq)
 
@@ -107,15 +110,15 @@ plt.show()
 # pc = coll.PatchCollection(pat)
 # ax.add_collection(pc)
 
-# update_board(4, 1, "khaki", "G")
-update_board(4, 2, "black", "Y")
+#update_board(4, 1, "khaki", "G")
+#pdate_board(4, 2, "black", "Y")
 
 
-def show():
-    plt.show()
+#def show():
+   # plt.show()
 
 
 plt.title("alexisle")
 # plt.axis('off')
-plt.show()
+
 plt.savefig('test.png', dpi=90)
