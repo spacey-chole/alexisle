@@ -2,6 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.collections as coll
+import matplotlib.animation as animation
+
+plt.title("alexisle")
+
 
 # import keyboard as kbd
 
@@ -97,6 +101,9 @@ def update_board(row, position, color, letter):
             xkey = np.arange(0, width, len(keyboard[j])+keybetween)
             sq = patches.Rectangle((xkey[i], ykey[j]), keywid, keyhei, fill=True, color=keystat[j][i])
             ax.add_patch(sq)
+            ax.text(xkey[i] + keywid / 2, ykey[j] + keyhei / 2, keyboard[j][i], fontsize=30, horizontalalignment='center',
+                    verticalalignment='center')
+
 
    # plt.show()
     yield status
@@ -114,12 +121,16 @@ plt.show()
 #update_board(4, 1, "khaki", "G")
 #pdate_board(4, 2, "black", "Y")
 
+# def animate(stat):
+#    status = stat
+#
+#    return status
+#
+# a = animation.FuncAnimation(fig, animate, update_board, blit=True, interval= 0.01)
 
 #def show():
    # plt.show()
 
-
-plt.title("alexisle")
 # plt.axis('off')
 
 plt.savefig('test.png', dpi=90)
