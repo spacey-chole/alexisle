@@ -9,7 +9,7 @@ df = df[df["validWordleAnswer"].notna()]
 wordList = df["validWordleAnswer"].tolist()
 print("nan-, but not gluten-, -free wordList: ", wordList)
 
-actualWord = "mercy"
+actualWord = "bored"
 # the word the computer guesses first
 startingWord = "adieu"  # prounounced møøse
 secondWord = "yolks"  # anticoagulant
@@ -45,13 +45,12 @@ while "".join(greenLetters) != actualWord and guessCount != 20:
         currLetter = currGuess[i]
         for j in range(len(actualWord)):
             wordLetter = actualWord[j]
-            # check letterTwice? does this work
-            letterTwice = False
             # check if letter in møøse, but in the wrong spot
             if currLetter == wordLetter and i != j:
                 print(currLetter + " is in the word but not in the right place")
-                yellowLetters.append(currLetter)
-                # letterTwice = True
+                if currLetter not in greenLetters:
+                    yellowLetters.append(currLetter)
+
             # the checker has found a møøse that is in the same place both in the actualWord (the correct answer)
             # and in the computer's guess
             if currLetter == wordLetter and i == j:
@@ -65,6 +64,7 @@ while "".join(greenLetters) != actualWord and guessCount != 20:
 
 
 # make new guess
+    # if no info about the word
     if len(yellowLetters) != 0 or greenLetters != ['_', '_', '_', '_', '_']:
         # iterates through word list backwards
         # starts at 2300
@@ -83,31 +83,35 @@ while "".join(greenLetters) != actualWord and guessCount != 20:
             count = 0
             if len(yellowLetters) != 0:
                 for yl in yellowLetters:
-                    if yl in currWord:
+                    if yl in wordList[w]:
                         count += 1
                 if count == 0:
                     print("deleting word using yellow:", wordList[w])
-                    # wordList.pop(w)
                     del wordList[w]
                     w -= 1
                 else:
-                    for i in range(len(currWord)):
+                    for i in range(len(wordList[w])):
                         # currWord[i] represents the current letter in the currWord being compared against the contents of our other lovely lists
-                        if (currWord[i] != greenLetters[i] and greenLetters[i] != '_') or (currWord[i] in lettersNotIn):
-                            print("deleting word using green and not in:", wordList[w])
+                        if (wordList[w][i] != greenLetters[i] and greenLetters[i] != '_') or (wordList[w][i] in lettersNotIn):
+                            print("deleting word using green and not in:", wordList[w], wordList[w][i])
                             del wordList[w]
                             w -= 1
+
+#end of while loop
         highestScore = 0
         highestWord = ""
         for word in wordList:
-            wordScore = 0
-            for letter in word:
-                wordScore += letterScores[letter]
-            print("score:", wordScore, "for word: ", word)
-            if wordScore > highestScore:
-                highestScore = wordScore
-                highestWord = word
-
+            if word not in alreadyGuessed:
+                word = word.lower()
+                wordScore = 0
+                for letter in range(len(word)):
+                    wordScore += letterScores[word[letter]]
+                    if word[letter] == greenLetters[letter]:
+                        wordScore += 50
+                print("score:", wordScore, "for word: ", word)
+                if wordScore > highestScore:
+                    highestScore = wordScore
+                    highestWord = word
         currGuess = highestWord
         print("next guess:", currGuess)
         print("word has a score:", highestScore)
