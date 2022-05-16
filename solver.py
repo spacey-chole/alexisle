@@ -4,10 +4,14 @@ import pandas as pd
 # A Møøse once bit my sister...
 # wordArray = text_file.read().split('\n')
 
-df = pd.read_csv("/Users/andrew/Desktop/python/Wordle/Wordle.csv")
+# df = pd.read_csv("/Users/andrew/Desktop/python/Wordle/Wordle.csv")
+# df = df[df["validWordleAnswer"].notna()]
+# wordList = df["validWordleAnswer"].tolist()
+
+# TODO: use TestWords
+df = pd.read_csv("/Users/andrew/Desktop/python/alexisle/TestWords.csv")
 df = df[df["validWordleAnswer"].notna()]
 wordList = df["validWordleAnswer"].tolist()
-# print("nan-, but not gluten-, -free wordList: ", wordList)
 
 actualWord = "bored"
 # the word the computer guesses first
@@ -57,7 +61,7 @@ while "".join(greenLetters) != actualWord and guessCount != 10:
         for j in range(len(actualWord)):
             # for each letter in the word that is the solution
             wordLetter = actualWord[j]
-            # check if letter in møøse, but in the wrong spot
+            # check if letter in word, but in the wrong spot
             if currLetter == wordLetter and i != j:
                 print(currLetter + " is in the word but not in the right place")
                 if currLetter not in greenLetters:
@@ -74,7 +78,6 @@ while "".join(greenLetters) != actualWord and guessCount != 10:
         if (currLetter not in greenLetters) and (currLetter not in yellowLetters) and (currLetter not in lettersNotIn):
             lettersNotIn.append(currLetter)
 
-
 # make new guess
     # if no info about the word
     if len(yellowLetters) != 0 or greenLetters != ['_', '_', '_', '_', '_']:
@@ -83,8 +86,10 @@ while "".join(greenLetters) != actualWord and guessCount != 10:
         w = len(wordList)-1
         # for w in reversed(range(len(wordList))):
 
-        #things wrong in here
-
+        # TODO: things wrong in here
+# top of breakpoint
+#not working for some reason
+        #TODO: trying another thing thursday where we do 2 for loops for each thing removing stuff
         while w >= 0:
         # at end of while
             currWord = wordList[w]
