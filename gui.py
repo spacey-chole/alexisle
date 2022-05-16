@@ -95,7 +95,7 @@ def update_board(row, position, color, letter):
         for j in range(6):
             # print(xx[i], yy[j])
             sq = patches.Rectangle((xx[i], yy[5-j]), wid, hei, fill=True, color=status[j][i])
-            ax.add_patch(sq)
+            list.add(sq)
     # for i in range(5):
     # for j in range(6):
     # ax.text(3, 3, letters,  fontsize=20)
