@@ -83,7 +83,7 @@ def update_board(row, position, color, letter):
     for i in range(5):
         for j in range(6):
             # print(xx[i], yy[j])
-            sq = patches.Rectangle((xx[i], yy[j]), wid, hei, fill=True, color=status[j][i])
+            sq = patches.Rectangle((xx[i], yy[5-j]), wid, hei, fill=True, color=status[j][i])
             ax.add_patch(sq)
     # for i in range(5):
     # for j in range(6):
@@ -92,7 +92,7 @@ def update_board(row, position, color, letter):
     # display letters that user guessed
     for i in range(0, 4):
         for j in range(0, 5):
-            ax.text(xx[i] + wid / 2, yy[j] + hei / 2, letters[j][i], fontsize=30, horizontalalignment='center',
+            ax.text(xx[i] + wid / 2, yy[5-j] + hei / 2, letters[j][i], fontsize=30, horizontalalignment='center',
                     verticalalignment='center')
 
     # display keyboard
@@ -106,7 +106,7 @@ def update_board(row, position, color, letter):
 
 
    # plt.show()
-    yield status
+    yield status, letters,
 
 plt.show()
     # printing text on KEYBOARD
@@ -121,12 +121,16 @@ plt.show()
 #update_board(4, 1, "khaki", "G")
 #pdate_board(4, 2, "black", "Y")
 
-# def animate(stat):
-#    status = stat
-#
-#    return status
-#
-# a = animation.FuncAnimation(fig, animate, update_board, blit=True, interval= 0.01)
+def animate(changes):
+    sta, le = changes
+    status = sta
+    letters = le
+
+
+    return fig
+# we wantd to return a list of squares because animate wasn't werking
+
+a = animation.FuncAnimation(fig, animate, update_board, blit=True, interval= 0.01)
 
 #def show():
    # plt.show()
