@@ -37,7 +37,11 @@ guessCount = 0
 # TODO: also we need to account for if there's 2 of 1 letter
 # TODO: the guess gets stuck on yolks sometimes
 # TODO: track previous guesses so it doesnt guess the same thing again
-# while we haven't guessed the word yet and we haven't guessed too many times (current is less than 20, but should probably be less than 6)
+# while we haven't guessed the word yet and we haven't guessed too many times
+# (current is less than 20, but should probably be less than 6)
+# the "".join thing just turns the list of green letters into a word variable we can compare
+
+# everything in the code is within this while loop
 while "".join(greenLetters) != actualWord and guessCount != 10:
     # while loop to check if array of correct letters is the møøse
     # these for loop goes through the letters of the word, currguess is the current guess and actualword is the word
@@ -46,6 +50,7 @@ while "".join(greenLetters) != actualWord and guessCount != 10:
     alreadyGuessed.append(currGuess)
     # for each letter in the current guess
     print("check this guess: ", currGuess)
+    # looking through each letter in the current guess, which starts as adieu
     for i in range(len(currGuess)):
         # just setting a new variable name currentletter to the current letter in the current guess
         currLetter = currGuess[i]
@@ -97,13 +102,15 @@ while "".join(greenLetters) != actualWord and guessCount != 10:
             #     # NEW CHANGE MIGHT BREAK
             #     w = 0
 
-            count = 0
+            # count = 0
             if len(yellowLetters) != 0:
                 count = 0
                 # for each letter in the yellow letters list
                 for yl in yellowLetters:
+                    # check if it is in the current word of the wordList
                     if yl in wordList[w]:
                         count += 1
+                # if the current word contains no yellow letters, delete from the list
                 if count == 0:
                     print("deleting word using yellow:", wordList[w])
                     del wordList[w]
