@@ -119,7 +119,7 @@ plt.show()
 # ax.add_collection(pc)
 
 #update_board(4, 1, "khaki", "G")
-#pdate_board(4, 2, "black", "Y")
+#update_board(4, 2, "black", "Y")
 
 def animate(changes):
     sta, le = changes
