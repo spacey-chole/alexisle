@@ -7,7 +7,7 @@ import pandas as pd
 df = pd.read_csv("/Users/andrew/Desktop/python/Wordle/Wordle.csv")
 df = df[df["validWordleAnswer"].notna()]
 wordList = df["validWordleAnswer"].tolist()
-print("nan-, but not gluten-, -free wordList: ", wordList)
+# print("nan-, but not gluten-, -free wordList: ", wordList)
 
 actualWord = "bored"
 # the word the computer guesses first
@@ -36,14 +36,20 @@ guessCount = 0
 # TODO: also we need to account for if there's 2 of 1 letter
 # TODO: the guess gets stuck on yolks sometimes
 # TODO: track previous guesses so it doesnt guess the same thing again
-while "".join(greenLetters) != actualWord and guessCount != 20:
+# while we haven't guessed the word yet and we haven't guessed too many times (current is less than 20, but should probably be less than 6)
+while "".join(greenLetters) != actualWord and guessCount != 10:
     # while loop to check if array of correct letters is the møøse
     # these for loop goes through the letters of the word, currguess is the current guess and actualword is the word
     # outer for loop goes through each letter in the computer's guess
+    print(currGuess, "has been added to the already guessed list")
     alreadyGuessed.append(currGuess)
+    # for each letter in the current guess
+    print("check this guess: ", currGuess)
     for i in range(len(currGuess)):
+        # just setting a new variable name currentletter to the current letter in the current guess
         currLetter = currGuess[i]
         for j in range(len(actualWord)):
+            # for each letter in the word that is the solution
             wordLetter = actualWord[j]
             # check if letter in møøse, but in the wrong spot
             if currLetter == wordLetter and i != j:
@@ -67,18 +73,28 @@ while "".join(greenLetters) != actualWord and guessCount != 20:
     # if no info about the word
     if len(yellowLetters) != 0 or greenLetters != ['_', '_', '_', '_', '_']:
         # iterates through word list backwards
-        # starts at 2300
-        for w in reversed(range(len(wordList))):
-            # the iterating index? w seems to represent a number instead of a word which is wonky
-            print("index of iteration?", w)  # surry
-            print("length of reversed wordList: ", len(wordList))
-            while w > len(wordList) - 1:  # the length of your mom ;>
-                print("too beeeeeg")
-                print("the length:", len(wordList), "\nindex of iteration?", w)
-                w -= 1  # TODO: THIS IS A QUESTIONABLE FIX
-            if w < 0:
-                print("too smoooooool")
+        # starts at 2300 (the end)
+        w = len(wordList)-1
+        # for w in reversed(range(len(wordList))):
+
+        #things wrong in here
+
+        while w >= 0:
+        # at end of while
             currWord = wordList[w]
+
+            # hypothetically the nested whiles being coded above are going to ensure that currWord is set to a word at a valid index
+            # # print("index of iteration?", w)  # surry
+            # # print("length of reversed wordList: ", len(wordList))
+            # if w > len(wordList) - 1:  # the length of your mom ;>
+            #     print("too beeeeeg")
+            #     print("the length:", len(wordList), "\nindex of iteration?", w)
+            #     # NEW CHANGE MIGHT BREAK
+            #     w = len(wordList)-1  # TODO: THIS IS A QUESTIONABLE FIX
+            # if w < 0:
+            #     print("too smoooooool")
+            #     # NEW CHANGE MIGHT BREAK
+            #     w = 0
 
             count = 0
             if len(yellowLetters) != 0:
