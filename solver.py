@@ -162,3 +162,5 @@ print("green letters: ", greenLetters)  # swag letters
 print("yellow letters: ", yellowLetters)  # slightly less swag letters
 print("letters not in word ", lettersNotIn)  # not at all swag
 # print("møøse")
+
+# Once upon a time, there was a møøse
