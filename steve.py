@@ -20,7 +20,8 @@ for q in range(1000):
     actualWord = wordList[random.randint(0,len(wordList))-1]
     # the word the computer guesses first
     startingWord = "crane"  # prounounced møøse and/or add - ee - ow
-    secondWord = "sound" # yolks
+    secondWord = "shtik" # yolks
+    thirdWord = "mould"
     # thirdWord = "" #tbd
     # the computer's guesses
     currGuess = startingWord
@@ -138,7 +139,7 @@ for q in range(1000):
                     del wordList[w]
 
             # start scoring the remaining words
-            if (guessCount != 1):
+            if (guessCount > 2):
                 highestScore = 0
                 highestWord = ""
                 for word in wordList:
@@ -160,7 +161,10 @@ for q in range(1000):
                 # make guess guess = møøse
             else:
                 # this is if the first guess had no letters in the word
-                currGuess = secondWord
+                if (guessCount == 1):
+                    currGuess = secondWord
+                else:
+                    currGuess = thirdWord
             # else:
             #     currGuess = thirdWord
         # print(currGuess, "has been added to the alreadyGuessed list")
