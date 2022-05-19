@@ -4,14 +4,14 @@ import pandas as pd
 # A Møøse once bit my sister...
 # wordArray = text_file.read().split('\n')
 
-# df = pd.read_csv("/Users/andrew/Desktop/python/Wordle/Wordle.csv")
-# df = df[df["validWordleAnswer"].notna()]
-# wordList = df["validWordleAnswer"].tolist()
-
-# TODO: use TestWords
-df = pd.read_csv("/Users/andrew/Desktop/python/alexisle/TestWords.csv")
+df = pd.read_csv("/Users/andrew/Desktop/python/Wordle/Wordle.csv")
 df = df[df["validWordleAnswer"].notna()]
 wordList = df["validWordleAnswer"].tolist()
+
+# TODO: use TestWords
+# df = pd.read_csv("/Users/andrew/Desktop/python/alexisle/TestWords.csv")
+# df = df[df["validWordleAnswer"].notna()]
+# wordList = df["validWordleAnswer"].tolist()
 
 actualWord = "power"
 # the word the computer guesses first
@@ -159,7 +159,7 @@ while "".join(greenLetters) != actualWord and guessCount != 6:
     else:
         # this is if the first guess had no letters in the word
         currGuess = secondWord
-    print(currGuess, " has been added to the alreadyGuessed list")
+    print(currGuess, "has been added to the alreadyGuessed list")
     alreadyGuessed.append(currGuess)
     print(currGuess)
     print(guessCount)
