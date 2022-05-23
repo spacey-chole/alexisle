@@ -11,7 +11,7 @@ wordList = df["validWordleAnswer"].tolist()
 
 frequency = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0}
 
-for q in range(1000):
+for q in range(10):
     print(q)
     df = pd.read_csv("/Users/andrew/Desktop/python/Wordle/Wordle.csv")
     df = df[df["validWordleAnswer"].notna()]
@@ -26,9 +26,12 @@ for q in range(1000):
     # the computer's guesses
     currGuess = startingWord
 
-    letterScores = {"e": 26, "a": 25, "r": 24, "i": 23, "o": 22, "t": 21, "n": 20, "s": 19, "l": 18, "c": 17,
-                    "u": 16, "d": 15, "p": 14, "m": 13, "h": 12, "g": 11, "b": 10, "f": 9, "y": 8, "w": 7,
-                    "k": 6, "v": 5, "x": 4, "z": 3, "j": 2, "q": 1}
+    # letterScores = {"e": 26, "a": 25, "r": 24, "i": 23, "o": 22, "t": 21, "n": 20, "s": 19, "l": 18, "c": 17,
+    #                 "u": 16, "d": 15, "p": 14, "m": 13, "h": 12, "g": 11, "b": 10, "f": 9, "y": 8, "w": 7,
+    #                 "k": 6, "v": 5, "x": 4, "z": 3, "j": 2, "q": 1}
+    letterScores = {"e": 30, "a": 30, "r": 30, "i": 30, "o": 30, "t": 30, "n": 30, "s": 30, "l": 20, "c": 20,
+                    "u": 20, "d": 20, "p": 20, "m": 20, "h": 20, "g": 20, "b": 10, "f": 10, "y": 10, "w": 10,
+                    "k": 10, "v": 10, "x": 10, "z": 10, "j": 10, "q": 10}
     greenLetters = ['_', '_', '_', '_', '_']
     # yellow
     yellowLetters = []
@@ -70,7 +73,7 @@ for q in range(1000):
                 if currLetter == wordLetter and i != j:
                     # print(currLetter + " is in the word but not in the right place")
                     if currLetter not in greenLetters:
-                        yellowLetters.append(currLetter)
+                        yellowLetters.append([currLetter, i])
 
                 # the checker has found a letter that is in the same place both in the actualWord (the correct answer)
                 # and in the computer's guess
@@ -86,57 +89,46 @@ for q in range(1000):
         # make new guess
         # if no info about the word
         if len(yellowLetters) != 0 or greenLetters != ['_', '_', '_', '_', '_']:
-            # iterates through word list backwards
-            # starts at 2300 (the end)
-            # w = len(wordList)-1
-            # for w in reversed(range(len(wordList))):
-
-            # TODO: things wrong in here
-            # top of breakpoint
-            #not working for some reason
-            #TODO: trying another thing thursday where we do 2 for loops for each thing removing stuff
-            # while w >= 0:
-            # at end of while
-            #     currWord = wordList[w]
-
-            # hypothetically the nested whiles being coded above are going to ensure that currWord is set to a word at a valid index
-            # # print("index of iteration?", w)  # surry
-            # # print("length of reversed wordList: ", len(wordList))
-            # if w > len(wordList) - 1:  # the length of your mom ;>
-            #     print("too beeeeeg")
-            #     print("the length:", len(wordList), "\nindex of iteration?", w)
-            #     # NEW CHANGE MIGHT BREAK
-            #     w = len(wordList)-1  # TODO: THIS IS A QUESTIONABLE FIX
-            # if w < 0:
-            #     print("too smoooooool")
-            #     # NEW CHANGE MIGHT BREAK
-            #     w = 0
-
             # count = 0
             if len(yellowLetters) != 0:
                 for w in reversed(range(len(wordList))):
-                    count = 0
+                    removed = False
+                    # count = 0
                     # for each letter in the yellow letters list
                     for yl in yellowLetters:
                         # check if it is in the current word of the wordList
-                        if yl in wordList[w]:
-                            count += 1
-                    # if the current word contains no yellow letters, delete from the list
-                    if count == 0:
-                        # print("deleting word using yellow:", wordList[w])
-                        del wordList[w]
+                        if yl[0] in wordList[w]:
+                            if wordList[w][yl[1]] == yl[0]:
+                                print(yl, wordList[w])
+                                removed = True
+                            # for i in range(len(currGuess)):
+                            #     if wordList[w][i] == currGuess[i] and currGuess[i] == yl:
+                            #         print("yl: ", yl, "wordList word: ", wordList[w], "guess: ", currGuess)
+                        else:
+                            # if the current word contains no yellow letters, delete from the list
+                            # print(yl[0], wordList[w])
+                            removed = True
                         # w -= 1
-                #goes through each letter in a word
+                    print("length of the word list pre-yellow letter deletion:  ", len(wordList))
+                    if removed:
+                        del wordList[w]
+                    # print("length of the word list post-yellow letter deletion: ", len(wordList))
+            yellowLetters.clear()
+            print("length of the word list pre-green letter deletion:  ", len(wordList))
+            print(actualWord)
+            print(wordList)
+            #goes through each letter in a word
+            #TODO: somethings wrong with green removal
             for w in reversed(range(len(wordList))):
                 removed = False
                 for i in range(len(wordList[w])):
-                    #stuff wrong here somewhere
-                    #this no work
-                    if (wordList[w][i] != greenLetters[i] and greenLetters[i] != '_') or (wordList[w][i] in lettersNotIn):
+                    if (greenLetters[i] != "_"):
+                        if (wordList[w][i] != greenLetters[i]) or (wordList[w][i] in lettersNotIn):
                         # print("deleting word using green and not in:", wordList[w], wordList[w][i])
-                        removed = True
-                if (removed):
+                            removed = True
+                if removed:
                     del wordList[w]
+            print("length of the word list post-green letter deletion:  ", len(wordList))
 
             # start scoring the remaining words
             if (guessCount > 2):
@@ -168,6 +160,10 @@ for q in range(1000):
             # else:
             #     currGuess = thirdWord
         # print(currGuess, "has been added to the alreadyGuessed list")
+        if (guessCount == 0):
+            currGuess = secondWord
+        else:
+            currGuess = thirdWord
         alreadyGuessed.append(currGuess)
         # print(currGuess)
         # print(guessCount)
