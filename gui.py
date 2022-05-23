@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import matplotlib.collections as coll
 import matplotlib.animation as animation
+import keyboard as kbd
+
 
 plt.title("alexisle")
 
@@ -83,7 +85,7 @@ for i in range(5):
 # display letters that user guessed
 for i in range(0, 5):
     for j in range(0, 5):
-        ax.text(xx[i] + wid / 2, yy[5 - j] + hei / 2, letters[i+j*4], fontsize=30, horizontalalignment='center',
+        farts = ax.text(xx[i] + wid / 2, yy[5 - j] + hei / 2, letters[i+j*4], fontsize=30, horizontalalignment='center',
                 verticalalignment='center')
 
 def update_board(row, position, color, letter):
@@ -116,6 +118,12 @@ def update_board(row, position, color, letter):
                     verticalalignment='center')
 
 
+    if kbd.is_pressed():
+        print("hi")
+        # update_board(4, 1, "khaki", "G")
+        # update_board(4, 2, "black", "Y")
+
+
    # plt.show()
     yield status, letters,
 
@@ -129,20 +137,8 @@ plt.show()
 # pc = coll.PatchCollection(pat)
 # ax.add_collection(pc)
 
-update_board(4, 1, "khaki", "G")
-update_board(4, 2, "black", "Y")
-
 def animate(changes):
 
-    for i in range(0, 4):
-        for j in range(0, 5):
-            ax.text(xx[i] + wid / 2, yy[5-j] + hei / 2, letters[j][i], fontsize=30, horizontalalignment='center',
-                    verticalalignment='center')
-    for i in range(5):
-        for j in range(6):
-            # print(xx[i], yy[j])
-            sq = patches.Rectangle((xx[i], yy[5-j]), wid, hei, fill=True, color=status[j][i])
-            ax.add_patch(sq)
     sta, le = changes
     status = sta
     letters = le
