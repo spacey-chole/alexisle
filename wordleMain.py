@@ -43,7 +43,6 @@ if funTime:
     correctWord = funWords[choiceIndex]
 else:
     correctWord = wordsReal[choiceIndex]
-
 # correctWord = "paddy"
 guessWord = "_____"
 

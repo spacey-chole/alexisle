@@ -95,26 +95,42 @@ for i in range(0, 5):
 
         farts = ax.text(xx[i] + wid / 2, yy[5 - j] + hei / 2, letters[j][i], fontsize=30, horizontalalignment='center',
                 verticalalignment='center')
-
+print(status)
+boxlist = []
+textlist = []
 def update_board(row, position, color, letter):
-    # displaying colors
-    print("updating")
-    status[row][position] = color
-    letters[row][position] = letter
-    for i in range(5):
-        for j in range(6):# print(xx[i], yy[j])
-            sq = patches.Rectangle((xx[i], yy[5-j]), wid, hei, fill=True, color=status[j][i])
-            boxlist.append(sq)
+    while (True):
+        # displaying colors
+        print("updating")
+        print(status)
+        print(status[row][position])
+        status[row][position] = color
+        letters[row][position] = letter
+        for i in range(5):
+            for j in range(6):# print(xx[i], yy[j])
+                sq = patches.Rectangle((xx[i], yy[5-j]), wid, hei, fill=True, color=status[j][i])
+                boxlist.append(sq)
 
-    # for i in range(5):
-    # for j in range(6):
-    # ax.text(3, 3, letters,  fontsize=20)
+        # for i in range(5):
+        # for j in range(6):
+        # ax.text(3, 3, letters,  fontsize=20)
+        currentRow = 0
+        if kbd.is_pressed("return"):
+        # display letters that user guessed
+        #     for i in range(0, 4):
+        #         for j in range(0, 5):
+        #             farts = ax.text(xx[i] + wid/2, yy[5-j] + hei / 2, letters[j][i], fontsize=30, horizontalalignment='center',
+        #                 verticalalignment='center')
+        #             textlist.append(farts)
 
-    # display letters that user guessed
-    for i in range(0, 4):
-        for j in range(0, 5):
-            ax.text(xx[i] + wid / 2, yy[5-j] + hei / 2, letters[j][i], fontsize=30, horizontalalignment='center',
-                    verticalalignment='center')
+
+            print("test")
+            # colorList = getColors();
+            # nextWord = getGuess();
+            #code to display word and color at current row
+
+            currentRow = currentRow + 1
+        yield textlist, boxlist,
 
     # display keyboard
     for j in range(0, 3):
@@ -143,26 +159,26 @@ plt.show()
 # pc = coll.PatchCollection(pat)
 # ax.add_collection(pc)
 
-def animate(changes):
-    print("hello")
-    tl, bl = changes
-    # for i in range(0, 4):
-    #     for j in range(0, 5):
-    #         ax.text(xx[i] + wid / 2, yy[5-j] + hei / 2, letters[j][i], fontsize=30, horizontalalignment='center',
-    #                 verticalalignment='center')
-    # if (kbd.is_pressed("m")):
-    #     for i in range(5):
-    #         for j in range(6):
-    #             sq = patches.Rectangle((xx[i], yy[5-j]), wid, hei, fill=True, color=status[j][i])
-
-    return tl, bl,
-
-for i in range(len(textlist)):
-    ax.text(textlist[i])
-for i in range(len(boxlist)):
-    ax.add_patch(boxlist[i])
-a = animation.FuncAnimation(fig, animate, update_board, blit=True, interval= 0.01)
-# we need to make the yield be something on the graph
+# def animate(changes):
+#     print("hello")
+#     tl, bl = changes
+#     # for i in range(0, 4):
+#     #     for j in range(0, 5):
+#     #         ax.text(xx[i] + wid / 2, yy[5-j] + hei / 2, letters[j][i], fontsize=30, horizontalalignment='center',
+#     #                 verticalalignment='center')
+#     # if (kbd.is_pressed("m")):
+#     #     for i in range(5):
+#     #         for j in range(6):
+#     #             sq = patches.Rectangle((xx[i], yy[5-j]), wid, hei, fill=True, color=status[j][i])
+#
+#     return tl, bl,
+#
+# for i in range(len(textlist)):
+#     ax.text(textlist[i])
+# for i in range(len(boxlist)):
+#     ax.add_patch(boxlist[i])
+# a = animation.FuncAnimation(fig, animate, update_board, blit=True, interval= 0.01)
+# # we need to make the yield be something on the graph
 plt.show()
 
 # plt.axis('off')
