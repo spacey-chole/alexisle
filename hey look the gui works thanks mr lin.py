@@ -34,22 +34,6 @@ plt.ylim([- 3.25, 7.5])
 # plt.axis('off')
 
 
-#word guess grid
-
-TOTAL_GUESSES = 6
-LETTERS_PER_WORD = 5
-status = []
-letters = []
-
-for i in range(TOTAL_GUESSES):
-    statRow = []
-    letterRow = []
-    for j in range(LETTERS_PER_WORD):
-        statRow.append("lightgrey")
-        letterRow.append("")
-    status.append(statRow)
-    letters.append(letterRow)
-
 #display word guess grid
 guessSquares = []
 dispLetters = []
@@ -57,27 +41,21 @@ for i in range(6):
     for j in range(5):
         xPos = xx[j]
         yPos = yy[5 - i]
-        sq = patches.Rectangle((xPos, yPos), wid, hei, fill=True, color=status[i][j])
+
+        #boxes
+        sq = patches.Rectangle((xPos, yPos), wid, hei, fill=True, color="lightgrey")
         guessSquares.append(sq)
         ax.add_patch(sq)
 
         #letters
-        dispLetter = ax.text(xPos + wid / 2, yPos + hei / 2, letters[i][j], fontsize=30, horizontalalignment='center',
+        dispLetter = ax.text(xPos + wid / 2, yPos + hei / 2, "", fontsize=30, horizontalalignment='center',
                         verticalalignment='center')
         dispLetters.append(dispLetter)
-
-
 
 # qwerty keyboard
 keyboard = [["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
             ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
             ["Z", "X", "C", "V", "B", "N", "M"]]
-
-# status of all the keys on the keyboard, appearently the authors were too lazy to write out "LightGrey" 26 times
-keystat = []
-for kbrow in (keyboard):
-    for j in range(len(kbrow)):
-        keystat.append("lightgrey")
 
 # display keyboard
 keywid = .5
