@@ -12,7 +12,7 @@ wordList = df["validWordleAnswer"].tolist()
 frequency = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0}
 
 for q in range(10):
-    print(q)
+    print("q:", q)
     df = pd.read_csv("/Users/andrew/Desktop/python/Wordle/Wordle.csv")
     df = df[df["validWordleAnswer"].notna()]
     wordList = df["validWordleAnswer"].tolist()
@@ -26,12 +26,12 @@ for q in range(10):
     # the computer's guesses
     currGuess = startingWord
 
-    # letterScores = {"e": 26, "a": 25, "r": 24, "i": 23, "o": 22, "t": 21, "n": 20, "s": 19, "l": 18, "c": 17,
-    #                 "u": 16, "d": 15, "p": 14, "m": 13, "h": 12, "g": 11, "b": 10, "f": 9, "y": 8, "w": 7,
-    #                 "k": 6, "v": 5, "x": 4, "z": 3, "j": 2, "q": 1}
-    letterScores = {"e": 30, "a": 30, "r": 30, "i": 30, "o": 30, "t": 30, "n": 30, "s": 30, "l": 20, "c": 20,
-                    "u": 20, "d": 20, "p": 20, "m": 20, "h": 20, "g": 20, "b": 10, "f": 10, "y": 10, "w": 10,
-                    "k": 10, "v": 10, "x": 10, "z": 10, "j": 10, "q": 10}
+    letterScores = {"e": 26, "a": 25, "r": 24, "i": 23, "o": 22, "t": 21, "n": 20, "s": 19, "l": 18, "c": 17,
+                    "u": 16, "d": 15, "p": 14, "m": 13, "h": 12, "g": 11, "b": 10, "f": 9, "y": 8, "w": 7,
+                    "k": 6, "v": 5, "x": 4, "z": 3, "j": 2, "q": 1}
+    # letterScores = {"e": 30, "a": 30, "r": 30, "i": 30, "o": 30, "t": 30, "n": 30, "s": 30, "l": 20, "c": 20,
+    #                 "u": 20, "d": 20, "p": 20, "m": 20, "h": 20, "g": 20, "b": 10, "f": 10, "y": 10, "w": 10,
+    #                 "k": 10, "v": 10, "x": 10, "z": 10, "j": 10, "q": 10}
     greenLetters = ['_', '_', '_', '_', '_']
     # yellow
     yellowLetters = []
@@ -83,7 +83,8 @@ for q in range(10):
                     # if currLetter in yellowLetters and letterTwice == False:
                     #     del yellowLetters[0]
             # if the currLetter belongs in lettersNotIn put it in there
-            if (currLetter not in greenLetters) and (currLetter not in yellowLetters) and (currLetter not in lettersNotIn):
+            if (currLetter not in actualWord):
+                print("current leter:", currLetter, "not in", actualWord)
                 lettersNotIn.append(currLetter)
 
         # make new guess
@@ -99,7 +100,15 @@ for q in range(10):
                         # check if it is in the current word of the wordList
                         if yl[0] in wordList[w]:
                             if wordList[w][yl[1]] == yl[0]:
-                                print(yl, wordList[w])
+                                # print(yl, wordList[w])
+                                if (wordList[w] == actualWord):
+                                    print("BAD THINGS HAPPENED")
+                                    print("BAD THINGS HAPPENED")
+                                    print("BAD THINGS HAPPENED")
+                                    print("BAD THINGS HAPPENED")
+                                    print("BAD THINGS HAPPENED")
+                                    print("BAD THINGS HAPPENED")
+
                                 removed = True
                             # for i in range(len(currGuess)):
                             #     if wordList[w][i] == currGuess[i] and currGuess[i] == yl:
@@ -109,64 +118,69 @@ for q in range(10):
                             # print(yl[0], wordList[w])
                             removed = True
                         # w -= 1
-                    print("length of the word list pre-yellow letter deletion:  ", len(wordList))
+                    # print("length of the word list pre-yellow letter deletion:  ", len(wordList))
                     if removed:
                         del wordList[w]
                     # print("length of the word list post-yellow letter deletion: ", len(wordList))
             yellowLetters.clear()
             print("length of the word list pre-green letter deletion:  ", len(wordList))
-            print(actualWord)
+            print(actualWord, currGuess)
             print(wordList)
             #goes through each letter in a word
-            #TODO: somethings wrong with green removal
+            #TODO: something's wrong with green removal
             for w in reversed(range(len(wordList))):
+                removedForNotIn = False
+                removedForGreenLetter = False
                 removed = False
                 for i in range(len(wordList[w])):
-                    if (greenLetters[i] != "_"):
-                        if (wordList[w][i] != greenLetters[i]) or (wordList[w][i] in lettersNotIn):
-                        # print("deleting word using green and not in:", wordList[w], wordList[w][i])
+                    if greenLetters[i] != "_":
+                        if (wordList[w][i] != greenLetters[i]):
+                            # if (wordList[w][i] not in lettersNotIn or wordList[w][i] == greenLetters[i]):
+                            #     print("this is in green letters -- WORSE THINGS HAPPENED")
                             removed = True
+                            removedForGreenLetter = True
+                        #TODO: letters not in not work
+                        if (wordList[w][i] in lettersNotIn):
+                            removed = True
+                            removedForNotIn = True
                 if removed:
                     del wordList[w]
+                    if wordList[w] == actualWord:
+                        print("BAD THINGS HAPPENED at ind: ", w)
+                        print("        actualWord matches wordList[w]")
+                        print("used green:", removedForGreenLetter)
+                        print(" used not in, ", removedForNotIn)
+                        print(lettersNotIn)
             print("length of the word list post-green letter deletion:  ", len(wordList))
 
-            # start scoring the remaining words
-            if (guessCount > 2):
-                highestScore = 0
-                highestWord = ""
-                for word in wordList:
-                    if word not in alreadyGuessed:
-                        word = word.lower()
-                        wordScore = 0
-                        for letter in range(len(word)):
-                            wordScore += letterScores[word[letter]]
-                            if word[letter] == greenLetters[letter]:
-                                wordScore += 50
-                        # print("score:", wordScore, "for word: ", word)
-                        if wordScore > highestScore:
-                            highestScore = wordScore
-                            highestWord = word
-                currGuess = highestWord
-                # print("next guess:", currGuess)
-                # print("word has a score:", highestScore)
+            print("wordList: ", wordList)
 
-                # make guess guess = møøse
-            else:
-                # this is if the first guess had no letters in the word
-                if (guessCount == 1):
-                    currGuess = secondWord
-                else:
-                    currGuess = thirdWord
-            # else:
-            #     currGuess = thirdWord
-        # print(currGuess, "has been added to the alreadyGuessed list")
-        if (guessCount == 0):
-            currGuess = secondWord
+            # start scoring the remaining words
+            highestScore = 0
+            highestWord = ""
+            if (len(wordList) == 1):
+                currGuess = wordList[0]
+            for word in wordList:
+                if word not in alreadyGuessed:
+                    word = word.lower()
+                    wordScore = 0
+                    for letter in range(len(word)):
+                        wordScore += letterScores[word[letter]]
+                        if word[letter] == greenLetters[letter]:
+                            wordScore += 50
+                    # print("score:", wordScore, "for word: ", word)
+                    if wordScore > highestScore:
+                        highestScore = wordScore
+                        highestWord = word
+            currGuess = highestWord
+            print("next guess:", currGuess)
+            print("word has a score:", highestScore)
+
+            # make guess guess = møøse
         else:
-            currGuess = thirdWord
-        alreadyGuessed.append(currGuess)
-        # print(currGuess)
-        # print(guessCount)
+            # this is if the first guess had no letters in the word
+            currGuess = secondWord
+        print(currGuess)
         guessCount += 1
 
     frequency[guessCount] += 1
