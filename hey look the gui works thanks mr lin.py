@@ -90,8 +90,8 @@ def update_board():
 
         if kbd.is_pressed('space'):
 
-            #list of 5 capitalized letters - convert to function call
-            word = ["C", "R", "A", "N", "E"]
+            #list of 5 letters, can be lowercase - convert to function call
+            word = ["C", "r", "A", "n", "E"]
 
             #list of 5 colors - convert to function call
             colors = ["green", "green", "yellow", "green", "green"]
@@ -111,12 +111,12 @@ def animate(updates):
 
             #set guess grid color and letters
             guessSquares[5*guessNum+i].set_color(guessColors[i])
-            dispLetters[5*guessNum+i].set_text(guessLetters[i])
+            dispLetters[5*guessNum+i].set_text(guessLetters[i].upper())
 
             #find letter on keyboard and set color
             for j in range(len(keyboard)):
                 for k in range(len(keyboard[j])):
-                    if guessLetters[i] == keyboard[j][k]:
+                    if guessLetters[i].upper() == keyboard[j][k]:
                         if j == 0:
                             index = k
                         elif j == 1:
