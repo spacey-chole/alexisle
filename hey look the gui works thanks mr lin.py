@@ -64,7 +64,7 @@ keybetween = 0.05
 
 kbSquares = []
 kbDispLetters = []
-for j in range(3):
+for j in range(len(keyboard)):
     for i in range(len(keyboard[j])):
 
         xPos = ((keywid+keybetween)*i) + ((j+1)*keywid/2)
@@ -89,8 +89,13 @@ def update_board():
         colors = []
 
         if kbd.is_pressed('space'):
+
+            #list of 5 capitalized letters - convert to function call
             word = ["C", "R", "A", "N", "E"]
+
+            #list of 5 colors - convert to function call
             colors = ["green", "green", "yellow", "green", "green"]
+
             numGuess += 1
             time.sleep(0.25)
 
@@ -103,9 +108,12 @@ def animate(updates):
 
     if len(guessLetters) == 5:
         for i in range(5):
+
+            #set guess grid color and letters
             guessSquares[5*guessNum+i].set_color(guessColors[i])
             dispLetters[5*guessNum+i].set_text(guessLetters[i])
 
+            #find letter on keyboard and set color
             for j in range(len(keyboard)):
                 for k in range(len(keyboard[j])):
                     if guessLetters[i] == keyboard[j][k]:
