@@ -59,7 +59,14 @@ status = ["black", "black", "black", "black", "black",
           "black", "black", "black", "black", "black","black", "black", "black", "black", "black"]
 # 2d array of the guessed letters for each square
 
-letters = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+letters = [["", "", "", "", ""],
+          ["", "", "", "", ""],
+          ["", "", "", "", ""],
+          ["", "", "", "", ""],
+          ["", "", "", "", ""],
+          ["", "", "", "", ""]]
+
+# letters = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 
 
 
@@ -76,7 +83,7 @@ keystat = [["Black", "Black", "Black", "Black", "Black", "Black", "Black"],
 for i in range(5):
     for j in range(6):
         # print(xx[i], yy[j])
-        sq = patches.Rectangle((xx[i], yy[5 - j]), wid, hei, fill=True, color=status[i+j*5])
+        sq = patches.Rectangle((xx[i], yy[5 - j]), wid, hei, fill=True, color=status[j][i])
         ax.add_patch(sq)
 # for i in range(5):
 # for j in range(6):
@@ -84,8 +91,9 @@ for i in range(5):
 
 # display letters that user guessed
 for i in range(0, 5):
-    for j in range(0, 5):
-        farts = ax.text(xx[i] + wid / 2, yy[5 - j] + hei / 2, letters[i+j*4], fontsize=30, horizontalalignment='center',
+    for j in range(0, 6):
+
+        farts = ax.text(xx[i] + wid / 2, yy[5 - j] + hei / 2, letters[j][i], fontsize=30, horizontalalignment='center',
                 verticalalignment='center')
 
 def update_board(row, position, color, letter):
@@ -94,10 +102,10 @@ def update_board(row, position, color, letter):
     status[row][position] = color
     letters[row][position] = letter
     for i in range(5):
-        for j in range(6):
-            # print(xx[i], yy[j])
+        for j in range(6):# print(xx[i], yy[j])
             sq = patches.Rectangle((xx[i], yy[5-j]), wid, hei, fill=True, color=status[j][i])
-            list.add(sq)
+            boxlist.append(sq)
+
     # for i in range(5):
     # for j in range(6):
     # ax.text(3, 3, letters,  fontsize=20)
@@ -118,8 +126,6 @@ def update_board(row, position, color, letter):
                     verticalalignment='center')
 
 
-    if kbd.is_pressed():
-        print("hi")
         # update_board(4, 1, "khaki", "G")
         # update_board(4, 2, "black", "Y")
 
@@ -138,17 +144,26 @@ plt.show()
 # ax.add_collection(pc)
 
 def animate(changes):
+    print("hello")
+    tl, bl = changes
+    # for i in range(0, 4):
+    #     for j in range(0, 5):
+    #         ax.text(xx[i] + wid / 2, yy[5-j] + hei / 2, letters[j][i], fontsize=30, horizontalalignment='center',
+    #                 verticalalignment='center')
+    # if (kbd.is_pressed("m")):
+    #     for i in range(5):
+    #         for j in range(6):
+    #             sq = patches.Rectangle((xx[i], yy[5-j]), wid, hei, fill=True, color=status[j][i])
 
-    sta, le = changes
-    status = sta
-    letters = le
+    return tl, bl,
 
-    return sq,
-
+for i in range(len(textlist)):
+    ax.text(textlist[i])
+for i in range(len(boxlist)):
+    ax.add_patch(boxlist[i])
 a = animation.FuncAnimation(fig, animate, update_board, blit=True, interval= 0.01)
 # we need to make the yield be something on the graph
-#def show():
-   # plt.show()
+plt.show()
 
 # plt.axis('off')
 
