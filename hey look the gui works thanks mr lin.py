@@ -1,3 +1,5 @@
+import time
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
@@ -112,6 +114,7 @@ def update_board():
             word = ["C", "R", "A", "N", "E"]
             colors = ["green", "green", "yellow", "green", "green"]
             numGuess += 1
+            time.sleep(0.25)
 
         yield numGuess, word, colors
 
