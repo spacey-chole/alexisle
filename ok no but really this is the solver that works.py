@@ -146,7 +146,7 @@ while guess_count < 6:
     for i in range(len(curr_guess)):
         guess_letter = curr_guess[i]
         remaining_letters = []
-        actual_letters = actual_word.split()
+        actual_letters = [letter for letter in actual_word]
         for j in range(len(actual_word)):
             actual_letter = actual_word[j: j+1]
             # there is a letter in both the actual_word and the curr_guess (a letter is correct)
@@ -164,8 +164,11 @@ while guess_count < 6:
         for letter in remaining_letters:
             if letter in actual_letters:
                 yellow_letters.append(letter)
+                #mark letter out in actual letters
             else:
                 gray_letters.append(guess_letter)
+
+
                 # elif i != j:
                 #     # trying to avoid adding duplicates to yellow_letters
                 #     if green_letters.count(guess_letter) < actual_word.count(guess_letter):
