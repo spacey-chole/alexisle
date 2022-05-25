@@ -2,7 +2,7 @@ import pandas as pd
 import random
 
 # TODO: change filepath back for Andrew's computer
-df = pd.read_csv("/Users/alexislindenfelser/PycharmProjects/wordle_solver/Wordle.csv")
+df = pd.read_csv("Wordle.csv")
 df = df[df["validWordleAnswer"].notna()]
 word_list = df["validWordleAnswer"].tolist()
 # print("wordList: ", word_list)
@@ -156,7 +156,7 @@ while guess_count < 6:
                 if i == j:
                     # same location and same letter
                     # print(" adding", guess_letter, "to green letters")
-                    green_letters[i] = guess_letter
+                    green_letters[j] = guess_letter
                     # TODO: not done
                     actual_letters[j] = "_"
                 else:
