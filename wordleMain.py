@@ -23,13 +23,13 @@ funWords = ['awful', 'clumpy', 'butts', 'coagulate', 'poopy',
             "amoeba", "among", "edwin", "dance", "david", "sussy"]
 
 # Reads csv file and assigns the column of potential words to an array of words
-wordsReal = pd.read_csv("Wordle.csv")
+wordsReal = pd.read_csv("Word Lists.csv")
 wordsReal = wordsReal["validWordleAnswer"]
 # Gets rid of all the NaN values in the list
 wordsReal = wordsReal.dropna()
 
 # list of valid guesses
-validGuess = pd.read_csv("Wordle.csv")
+validGuess = pd.read_csv("Word Lists.csv")
 validGuess = validGuess["validWordleGuess"].dropna()
 
 # # selects a random index to use as the wordle word

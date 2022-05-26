@@ -4,7 +4,7 @@ import pandas as pd
 # A Møøse once bit my sister...
 # wordArray = text_file.read().split('\n')
 
-df = pd.read_csv("/Users/andrew/Desktop/python/Wordle/Wordle.csv")
+df = pd.read_csv("/Users/andrew/Desktop/python/Wordle/Word Lists.csv")
 df = df[df["validWordleAnswer"].notna()]
 wordList = df["validWordleAnswer"].tolist()
 

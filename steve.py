@@ -5,7 +5,7 @@ import random
 # A Møøse once bit my sister...
 # wordArray = text_file.read().split('\n')
 
-df = pd.read_csv("/Users/andrew/Desktop/python/Wordle/Wordle.csv")
+df = pd.read_csv("/Users/andrew/Desktop/python/Wordle/Word Lists.csv")
 df = df[df["validWordleAnswer"].notna()]
 wordList = df["validWordleAnswer"].tolist()
 
@@ -13,7 +13,7 @@ frequency = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0}
 
 for q in range(10):
     print("q:", q)
-    df = pd.read_csv("/Users/andrew/Desktop/python/Wordle/Wordle.csv")
+    df = pd.read_csv("/Users/andrew/Desktop/python/Wordle/Word Lists.csv")
     df = df[df["validWordleAnswer"].notna()]
     wordList = df["validWordleAnswer"].tolist()
 

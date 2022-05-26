@@ -2,7 +2,7 @@ import pandas as pd
 import random
 
 # TODO: change filepath back for Andrew's computer
-df = pd.read_csv("Wordle.csv")
+df = pd.read_csv("Word Lists.csv")
 df = df[df["validWordleAnswer"].notna()]
 word_list = df["validWordleAnswer"].tolist()
 # print("wordList: ", word_list)
