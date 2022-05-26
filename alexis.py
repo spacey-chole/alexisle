@@ -1,17 +1,16 @@
 import pandas as pd
 import random
-import gamelogic
 
+# TODO: change filepath back for Andrew's computer
 df = pd.read_csv("Word Lists.csv")
 df = df[df["validWordleAnswer"].notna()]
 word_list = df["validWordleAnswer"].tolist()
 # print("wordList: ", word_list)
 
-# actual_word = str(random.choices(word_list))
+actual_word = str(random.choices(word_list))
 # have to remove the [' '] from the actual word. i hate the .choices method
-# actual_word = actual_word[2: 7]
-actual_word = "house"
-# actual_word = "adieu"
+actual_word = actual_word[2: 7]
+# actual_word = "house"
 print("actual_word: ", actual_word)
 
 # TODO: find the smartest possible starting_word -- the one that always results in solving in 6 guesses
@@ -24,7 +23,7 @@ guess_count = 0
 
 # these lists seem poorly named, but they make sense
 # these were created because deleting things out of lists
-    # (i tried remove(), pop(), and del() just messed up the indexes)
+# (i tried remove(), pop(), and del() just messed up the indexes)
 
 # ok_words represents the list of words that make sense for the computer to guess
 # after the words containing gray letters are filtered out from the word list
@@ -59,13 +58,13 @@ ok_words_4 = []
     # based on letter frequency [and also green and yellow contents checks -- might be wrong]
 
 
-def get_next_guess(words_to_guess_from, prev_guess):
+def get_next_guess(smart_guesses, prev_guess):
     # pick words that have the most letters than the first guess
     # highest_diff represents the maximum number of letters different from the original list are in the smart guesses
     highest_diff = 0
     diff = 0
-    for i in range(len(words_to_guess_from)):
-        poss_guess = words_to_guess_from[i]
+    for i in range(len(smart_guesses)):
+        poss_guess = smart_guesses[i]
         # print("poss_guess:", poss_guess)
         for j in range(len(prev_guess)):
             # print(" is", prev_guess[j], "in", poss_guess, "?")
@@ -80,14 +79,14 @@ def get_next_guess(words_to_guess_from, prev_guess):
             # max different letters from OG guess
             # print("highest_diff: ", diff)
         diff = 0
-    # print("     highest_diff:", highest_diff)
+    print("     highest_diff:", highest_diff)
 
     # now that we know the most possible letters we can differ, put the highest_diff words into a new list
     smarter_guesses = []
-    for word in words_to_guess_from:
+    for word in smart_guesses:
         poss_guess = word
         # print("poss_guess:", poss_guess)
-        for letter in poss_guess:
+        for letter in prev_guess:
             # print(" is", prev_guess[j], "in", poss_guess, "?")
             if letter not in poss_guess:
                 # print(" no it isn't")
@@ -125,11 +124,9 @@ def get_next_guess(words_to_guess_from, prev_guess):
             highest_score = score
             highest_word = word
         # print("word: ", word, ", score:", score)
-    # print("     highest_score:", highest_word)
+    print("     highest_score:", highest_word)
     return highest_word
 
-
-words_remaining = [word for word in word_list]
 
 while guess_count < 6:
     print()
@@ -145,38 +142,54 @@ while guess_count < 6:
     print("curr_guess: ", curr_guess)
     print("guess_count: ", guess_count)
     # sorting the letters in the guess word into the proper lists/categories based on the actual word
-    # print("sorting letters into the lists...")
-
-    # TODO: make sure duplicate letters are properly added/removed from yellow list when they become green
-
-    letter_colors = gamelogic.processGuess(curr_guess, actual_word)
-    print(letter_colors)
+    print("sorting letters into the lists...")
+    for i in range(len(curr_guess)):
+        guess_letter = curr_guess[i]
+        for j in range(len(actual_word)):
+            actual_letter = actual_word[j: j+1]
+            # there is a letter in both the actual_word and the curr_guess (a letter is correct)
+            # print(guess_letter, " in the guess is being compared to ", actual_letter)
+            if guess_letter == actual_letter:
+                # now, check if it is yellow or green
+                if i == j:
+                    # same location and same letter
+                    # print(" adding", guess_letter, "to green letters")
+                    green_letters[i] = guess_letter
+                elif i != j:
+                    # trying to avoid adding duplicates to yellow_letters
+                    if guess_letter not in yellow_letters:
+                        # print(" adding", guess_letter, "to yellow letters")
+                        yellow_letters.append(guess_letter)
     print("green_letters: ", green_letters)
     print("yellow_letters: ", yellow_letters)
+    for i in range(len(curr_guess)):
+        guess_letter = curr_guess[i]
+        if (guess_letter not in green_letters) and (guess_letter not in yellow_letters) and (guess_letter not in gray_letters):
+            # print(" adding", guess_letter, "to gray letters")
+            gray_letters.append(curr_guess[i])
     print("gray_letters: ", gray_letters)
-
-    for c in range(len(letter_colors)):
-        if letter_colors[c] == "green":
-            green_letters[c] = curr_guess[c]
-        elif letter_colors[c] == "yellow":
-            yellow_letters.append(curr_guess[c])
-        else:
-            gray_letters.append(curr_guess[c])
 
     # now filtering the word list by deleting things that shouldn't be guessed because we know they're wrong
     # start by deleting based on gray letters
-    # print("filtering by gray letters...")
-    # print("before", len(words_remaining))
-    for word in word_list:
-        # curr_word = word_list[word]
+    print("filtering by gray letters...")
+    for word in range(len(word_list)):
+        curr_word = word_list[word]
         ok = True
         for letter in range(len(gray_letters)):
             if gray_letters[letter] in curr_word:
                 ok = False
-        if not ok and word in words_remaining:
-            words_remaining.remove(word)
-
-    # print("filtering by green letters...")
+        if ok:
+            ok_words.append(curr_word)
+    if 'FALSE' in ok_words:
+        ok_words.remove('FALSE')
+    print("ok_words: ", ok_words)
+    # questionable fix, but it did work
+    # for some reason, FALSE (yes in all caps) would occasionally get added to the list of ok_words
+    # (which is not ok)
+    # so I had to remove it by hand, because the solver would get stuck on it and keep guessing "FALSE"
+    # I thought it was something wrong with not removing the curr_guess, but that was not the problem
+    # also see below
+    print("filtering by green letters...")
     for word in range(len(ok_words)):
         curr_word = ok_words[word]
         ok = True
@@ -185,37 +198,30 @@ while guess_count < 6:
             if (curr_word[letter] != green_letters[letter]) and (green_letters[letter] != "_"):
                 # print(curr_word, "doesn't have", green_letters[letter], "in the right spot. not ok.")
                 ok = False
-        if not ok and word in words_remaining:
-            words_remaining.remove(word)
+        if ok:
+            ok_words_2.append(curr_word)
+        # questionable fix, but it did work
+        # for some reason, FALSE (yes in all caps) would occasionally get added to the list of ok_words
+        # (which is not ok)
+        # so I had to remove it by hand, because the solver would get stuck on it and keep guessing "FALSE"
+        # I thought it was something wrong with not removing the curr_guess, but that was not the problem
+        # also see above
+        if 'FALSE' in ok_words_2:
+            ok_words.remove('FALSE')
+    print("ok_words_2:", ok_words_2)
 
-    # print("ok_words_2:", ok_words_2)
-    # print("filtering by yellow letters...")
-    # ok_words_2 to ok_words_3
-    for word in words_remaining:
-        ok = True
-        for letter in yellow_letters:
-            if letter not in word:
-                ok = False
-        if not ok and word in words_remaining:
-            words_remaining.remove(word)
-
-    # print("ok_words_3", ok_words_3)
-
-    # prevents guessing the same thing more than once
-    # for word in words_remaining:
-    #     if word != curr_guess:
-    #         words_remaining.append(word)
-
-    # curr_guess = get_next_guess(ok_words_4, curr_guess)
-    if 'FALSE' in words_remaining:
-        words_remaining.remove('FALSE')
-    curr_guess = get_next_guess(words_remaining, curr_guess)
-
-
+    # TODO: switch to a green_letters comparison, not actual_word
     # picking next guess and incrementing guess_count
     guess_count += 1
+    # prevents guessing the same thing more than once
+    for word in ok_words_2:
+        if word != curr_guess:
+            ok_words_3.append(word)
+    print("picking next guess")
+    curr_guess = get_next_guess(ok_words_3, curr_guess)
     print("next guess:", curr_guess)
     print("guess_count:", guess_count)
     if curr_guess == actual_word:
         print("solved (on next guess):", curr_guess)
         break
+
