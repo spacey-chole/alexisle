@@ -6,29 +6,6 @@ df = pd.read_csv("Word Lists.csv")
 df = df[df["validWordleAnswer"].notna()]
 word_list = df["validWordleAnswer"].tolist()
 
-
-
-
-# TODO: edit the get_next_guess() method to pick a smarter guess so it gets it every time
-#   first pick highest scoring, then from there pick most different ?
-#   (just reverse the order in which the smarter_guesses thing is made)
-#   or pick a different starting word than "crane," do the weird analysis thing
-
-# picking the "fittest" guess to most greatly increase our chances of getting the solution word (actual_word)
-# things to consider when picking the next guess:
-     # the highest scoring word
-     # a word with completely different letters than the first guess to see the status of more potential letters
-     # only pulling from the available pool
-
-# what the method currently does:
-    # using the already filtered list from gray and green letters (smart_guesses),
-    # find the word with the most difference of letters from the original word (max = 5--all diff, min = 0--all same)
-    # this uses the "highest_diff" var
-    # put all the words with the maximum number of different letters into their own list because deleting no worky
-    # then of the diverse words in the new list (smarter_guesses) go pick the word with the highest score,
-    # based on letter frequency [and also green and yellow contents checks -- might be wrong]
-
-
 def get_next_guess(words_to_guess_from, prev_guess):
 
     # pick words that have the most letters than the first guess
@@ -66,6 +43,28 @@ def get_next_guess(words_to_guess_from, prev_guess):
 
 
 
+# TODO: edit the get_next_guess() method to pick a smarter guess so it gets it every time
+#   first pick highest scoring, then from there pick most different ?
+#   (just reverse the order in which the smarter_guesses thing is made)
+#   or pick a different starting word than "crane," do the weird analysis thing
+
+# picking the "fittest" guess to most greatly increase our chances of getting the solution word (actual_word)
+# things to consider when picking the next guess:
+     # the highest scoring word
+     # a word with completely different letters than the first guess to see the status of more potential letters
+     # only pulling from the available pool
+
+# what the method currently does:
+    # using the already filtered list from gray and green letters (smart_guesses),
+    # find the word with the most difference of letters from the original word (max = 5--all diff, min = 0--all same)
+    # this uses the "highest_diff" var
+    # put all the words with the maximum number of different letters into their own list because deleting no worky
+    # then of the diverse words in the new list (smarter_guesses) go pick the word with the highest score,
+    # based on letter frequency [and also green and yellow contents checks -- might be wrong]
+
+
+
+
 finished = 0
 
 for a in range(len(word_list)):
@@ -77,8 +76,6 @@ for a in range(len(word_list)):
 
     words_remaining = [word for word in word_list]
 
-    actual_word = "tweed"
-    # actual_word = word_list[random.randint(0, len(word_list))]
     actual_word = word_list[a]
 
     print("actual -", actual_word)
@@ -181,6 +178,8 @@ for a in range(len(word_list)):
 
 
 print("Finished", finished, "out of", len(word_list), "within 6 guesses")
-print("Accuracy:", (finished/len(word_list)))
+print("Completion rate:", (finished/len(word_list)))
+
+
 
 
