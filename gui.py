@@ -183,4 +183,3 @@ plt.show()
 
 # plt.axis('off')
 
-# plt.savefig('test.png', dpi=90)
