@@ -1,5 +1,5 @@
 import time
-
+import guesserfunctions as gf
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
@@ -9,7 +9,7 @@ import keyboard as kbd
 
 # create figure for MatPlot
 fig = plt.figure(figsize=(10, 10))
-
+gf.setup()
 # create and set limits for plot
 ax = plt.subplot(111, aspect='equal')
 plt.xlim([-.75, 6.75])
@@ -89,10 +89,12 @@ def update_board():
         if kbd.is_pressed('space'):
 
             # list of 5 letters, can be lowercase - convert to function call
-            word = ["C", "r", "A", "n", "E"]
+            # word = ["C", "r", "A", "n", "E"]
+
+            word,colors = gf.produce_guess()
 
             # list of 5 colors - convert to function call
-            colors = ["green", "green", "yellow", "green", "green"]
+            # colors = ["green", "green", "yellow", "green", "green"]
 
             numGuess += 1
             time.sleep(0.25)
