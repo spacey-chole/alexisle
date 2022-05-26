@@ -1,5 +1,6 @@
 import pandas as pd
 import random
+from PIL import Image
 
 df = pd.read_csv("Word Lists.csv")
 df = df[df["validWordleAnswer"].notna()]
@@ -237,3 +238,6 @@ while guess_count < 6:
     if curr_guess == actual_word:
         print("solved?:", curr_guess)
         break
+
+im =Image.open("STEVE_THE_GOBLIN.JPG")
+im.show()
