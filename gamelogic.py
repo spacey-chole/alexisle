@@ -45,7 +45,7 @@ import random as rd
 #     correctWord = wordsReal[choiceIndex]
 #
 # # print("correct word:", correctWord)
-# # correctWord = "paddy"
+# correctWord = "catch"
 # guessWord = "_____"
 #
 # # sets counter for guesses
@@ -76,6 +76,8 @@ def processGuess(guessWord, correctWord):
     for j in correctWord:
         correctLets.append(j)
 
+    guessedLets = [let for let in guessWord]
+
     # checks guess, and prints in terminal if the letter is in the right spot (green),
     # if it is in the word but not in the right spot (yellow), or if the letter isn't in the word
     # at the end, increment numGuess
@@ -86,18 +88,23 @@ def processGuess(guessWord, correctWord):
 
     for i in range(5):
         if guessWord[i] == correctWord[i]:
-            correctLets.remove(guessWord[i])
+            correctLets[i] = ""
+            guessedLets[i] = ""
             greenIn.append(i)
-            print("added ", i, " to greenIns")
+            # print("added ", i, " to greenIns")
 
-    for i in range(5):
-        if correctLets.__contains__(guessWord[i]) and not greenIn.__contains__(guessWord[i]):
-            correctLets.remove(guessWord[i])
-            yellowIn.append(i)
-            print("added ", i, " to yellowIns")
+    for i in range(len(correctLets)):
+        guessIndex = -1
+        for j in range(len(guessedLets)):
+            if guessedLets[j] != "" and correctLets[i] == guessedLets[j]:
+                guessIndex = j
+        if guessIndex > -1:
+            guessedLets[guessIndex] = ""
+            yellowIn.append(guessIndex)
+            # print("added ", guessIndex, " to yellowIns")
 
-    print(greenIn)
-    print(yellowIn)
+    print("green", greenIn)
+    print("yellow", yellowIn)
 
     colorList = []
     for i in range(5):
@@ -121,14 +128,14 @@ def processGuess(guessWord, correctWord):
 # while loop, iterates while the guess is wrong and numGuess is less than 5
 # No realli!
 # while guessWord != correctWord and numGuess < 6:
-    # prints out your guess word so far
-    # guess = input("Enter your word: ")
-    # colors = processGuess(guess, correctWord)
-    # print()
-    # print(colors)
-    #
-    # numGuess += 1
-    # gui.show()
+#
+#     guess = input("Enter your word: ")
+#     colors = processGuess(guess, correctWord)
+#     print()
+#     print(colors)
+#
+#     numGuess += 1
+#     # gui.show()
 #
 # # output messages depending on result
 # if guessWord == correctWord:
