@@ -23,6 +23,7 @@ keyhei = .8
 # number of rows and columns of squaresYes
 nrows = 6
 ncols = 5
+currentRow = 0
 
 # distance between squares?
 inbetween = 0.25
@@ -69,7 +70,8 @@ letters = [["", "", "", "", ""],
 # letters = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 
 
-
+if kbd.is_pressed('up'):
+    print("test")
 # qwerty keyboard 2d array
 keyboard = [["Z", "X", "C", "V", "B", "N", "M"],
             ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -147,10 +149,9 @@ def update_board(row, position, color, letter):
 
 
    # plt.show()
-    yield status, letters,
 
-plt.show()
-    # printing text on KEYBOARD
+
+ # printing text on KEYBOARD
     # for i in range(4):
     # for j in range(len(keyboard[i])):
     # ax.text(xkey[i], ykey[i], keyboard[i][j], color="yellow", fontsize = 10, horizontalalignment = 'center', verticalalignment='center')
@@ -158,6 +159,8 @@ plt.show()
 
 # pc = coll.PatchCollection(pat)
 # ax.add_collection(pc)
+update_board(4,2,"yellow", "a")
+plt.show()
 
 # def animate(changes):
 #     print("hello")
@@ -180,6 +183,7 @@ plt.show()
 # a = animation.FuncAnimation(fig, animate, update_board, blit=True, interval= 0.01)
 # # we need to make the yield be something on the graph
 plt.show()
+
 
 # plt.axis('off')
 
