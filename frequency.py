@@ -7,7 +7,7 @@ simulate_times = 500
 for q in range(simulate_times):
     print("q:", q+1)  # simulation round
 
-    df = pd.read_csv("/Users/andrew/Desktop/python/Wordle/Wordle.csv")
+    df = pd.read_csv("Word Lists.csv")
     df = df[df["validWordleAnswer"].notna()]
     word_list = df["validWordleAnswer"].tolist()
     # print("wordList: ", word_list)

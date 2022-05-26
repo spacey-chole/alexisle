@@ -181,5 +181,3 @@ print("Finished", finished, "out of", len(word_list), "within 6 guesses")
 print("Completion rate:", (finished/len(word_list)))
 
 
-
-
