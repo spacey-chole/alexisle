@@ -6,6 +6,10 @@ df = pd.read_csv("Word Lists.csv")
 df = df[df["validWordleAnswer"].notna()]
 word_list = df["validWordleAnswer"].tolist()
 
+# for producing guess
+letterScores = {"e": 26, "a": 25, "r": 24, "i": 23, "o": 22, "t": 21, "n": 20, "s": 19, "l": 18, "c": 17,
+                "u": 16, "d": 15, "p": 14, "m": 13, "h": 12, "g": 11, "b": 10, "f": 9, "y": 8, "w": 7,
+                "k": 6, "v": 5, "x": 4, "z": 3, "j": 2, "q": 1}
 
 def get_next_guess(words_to_guess_from, prev_guess):
     # pick words that have the most letters than the first guess
@@ -23,10 +27,6 @@ def get_next_guess(words_to_guess_from, prev_guess):
         if diff == highest_diff:
             diverse_guesses.append(guess_word)
 
-    # then, use the highest score based on letter frequency thing to pick the smartest of the smarter_guesses
-    letterScores = {"e": 26, "a": 25, "r": 24, "i": 23, "o": 22, "t": 21, "n": 20, "s": 19, "l": 18, "c": 17,
-                    "u": 16, "d": 15, "p": 14, "m": 13, "h": 12, "g": 11, "b": 10, "f": 9, "y": 8, "w": 7,
-                    "k": 6, "v": 5, "x": 4, "z": 3, "j": 2, "q": 1}
 
     highest_score = 0
     highest_word = ""
@@ -42,7 +42,7 @@ def get_next_guess(words_to_guess_from, prev_guess):
 
 
 green_letters = []
-yellow_letters = []
+yellow_letters = {}
 gray_letters = []
 words_remaining = []
 actual_word = word_list[random.randint(0, len(word_list))]
@@ -59,7 +59,8 @@ def setup():
     green_letters.clear()
     for i in range(5):
         green_letters.append("_")
-    yellow_letters.clear()
+    for letter in letterScores:
+        yellow_letters[letter] = []
     gray_letters.clear()
     words_remaining.clear()
     for word in word_list:
@@ -92,7 +93,8 @@ def produce_guess():
         if letter_colors[c] == "green":
             green_letters[c] = curr_guess[c]
         elif letter_colors[c] == "yellow":
-            yellow_letters.append(curr_guess[c])
+            yellow_letters[curr_guess[c]].append(c)
+            print(curr_guess[c], yellow_letters[curr_guess[c]])
         else:
             gray_letters.append(curr_guess[c])
 
@@ -114,12 +116,23 @@ def produce_guess():
     while i < len(words_remaining):
         valid = True
         for letter in yellow_letters:
-            if letter not in words_remaining[i]:
+            if len(yellow_letters[letter]) > 0 and letter not in words_remaining[i]:
                 valid = False
         if not valid:
             del words_remaining[i]
         else:
             i += 1
+
+    # filter out words with yellow letters in guessed positions
+    for letter in yellow_letters:
+        for j in range (len(yellow_letters[letter])):
+            i = 0
+            while i < len(words_remaining):
+                if words_remaining[i][yellow_letters[letter][j]] == letter:
+                    del words_remaining[i]
+                else:
+                    i += 1
+
 
     # filter by gray letters
     for j in range(len(letter_colors)):
@@ -180,5 +193,5 @@ def test_all_words():
     print("Accuracy:", (finished / len(word_list)))
 
 
-# test_all_words()
+test_all_words()
 

@@ -91,7 +91,7 @@ def update_board():
         word = []
         colors = []
 
-        if kbd.is_pressed('space') and keepGoing:
+        if kbd.is_pressed('space') and keepGoing and numGuess < 6:
 
             word, colors = guesserfunctions.produce_guess()
 
@@ -102,6 +102,7 @@ def update_board():
             for c in colors:
                 if c == "yellow" or c == "gray":
                     keepGoing = True
+
 
         yield numGuess, word, colors
 
