@@ -178,7 +178,7 @@ def test_all_words():
             produce_guess()
 
             if curr_guess == actual_word:
-                print("solved on guess", guess_count + 1)
+                print("solved on guess", guess_count)
                 finished += 1
                 dnf = False
                 break
