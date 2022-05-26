@@ -6,6 +6,9 @@ import matplotlib.patches as patches
 import matplotlib.animation as animation
 import keyboard as kbd
 
+import guesserfunctions
+
+guesserfunctions.setup()
 
 # create figure for MatPlot
 fig = plt.figure(figsize=(10, 10))
@@ -89,10 +92,12 @@ def update_board():
         if kbd.is_pressed('space'):
 
             # list of 5 letters, can be lowercase - convert to function call
-            word = ["C", "r", "A", "n", "E"]
+            # word = ["C", "r", "A", "n", "E"]
+            #
+            # # list of 5 colors - convert to function call
+            # colors = ["green", "green", "yellow", "green", "green"]
 
-            # list of 5 colors - convert to function call
-            colors = ["green", "green", "yellow", "green", "green"]
+            word, colors = guesserfunctions.produce_guess()
 
             numGuess += 1
             time.sleep(0.25)
