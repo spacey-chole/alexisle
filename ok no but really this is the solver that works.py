@@ -90,6 +90,11 @@ for a in range(len(word_list)):
     guess_count = 0
     while guess_count < 6:
 
+        if guess_count == 1:
+            curr_guess = "shtik"
+        if guess_count == 2:
+            curr_guess = "mould"
+
         print("guess", guess_count+1, "-", curr_guess)
 
         if curr_guess == actual_word:
@@ -162,10 +167,7 @@ for a in range(len(word_list)):
 
         curr_guess = get_next_guess(words_remaining, curr_guess)
 
-        if guess_count == 1:
-            curr_guess = "shtik"
-        if guess_count == 2:
-            curr_guess = "mould"
+
 
 
 
