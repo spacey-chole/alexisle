@@ -47,8 +47,7 @@ gray_letters = []
 words_remaining = []
 actual_word = word_list[random.randint(0, len(word_list))]
 
-starting_word = "crane"
-curr_guess = starting_word
+
 guess_count = 0
 
 
@@ -78,11 +77,11 @@ def produce_guess():
 
     if guess_count == 0:
         curr_guess = "crane"
-    if guess_count == 1:
+    elif guess_count == 1:
         curr_guess = "shtik"
-    if guess_count == 2:
+    elif guess_count == 2:
         curr_guess = "mould"
-    if guess_count >= 3:
+    else:
         curr_guess = get_next_guess(words_remaining, curr_guess)
 
     print("guess", guess_count + 1, "-", curr_guess)
@@ -162,8 +161,11 @@ def produce_guess():
     return [letter for letter in curr_guess], letter_colors
 
 
+
+
 def test_all_words():
     global actual_word
+    incomplete_words = "didn't complete:"
     finished = 0
 
     for a in range(len(word_list)):
@@ -186,12 +188,15 @@ def test_all_words():
         if dnf:
             print()
             print("didn't finish")
+            incomplete_words += "\n#" + str(a+1) + " - " + actual_word
 
         print()
         print("------------------")
 
     print("Finished", finished, "out of", len(word_list), "within 6 guesses")
     print("Accuracy:", (finished / len(word_list)))
+    print()
+    print(incomplete_words)
 
 
 # test_all_words()
