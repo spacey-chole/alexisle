@@ -89,12 +89,11 @@ for a in range(len(word_list)):
 
     guess_count = 0
     while guess_count < 6:
-        guess_count += 1
 
-        print("guess", guess_count, "-", curr_guess)
+        print("guess", guess_count+1, "-", curr_guess)
 
         if curr_guess == actual_word:
-            print("solved on guess", guess_count)
+            print("solved on guess", guess_count+1)
             finished += 1
             break
 
@@ -159,12 +158,16 @@ for a in range(len(word_list)):
         if curr_guess in words_remaining:
             words_remaining.remove(curr_guess)
 
+        guess_count += 1
+
         curr_guess = get_next_guess(words_remaining, curr_guess)
 
         if guess_count == 1:
             curr_guess = "shtik"
         if guess_count == 2:
             curr_guess = "mould"
+
+
 
 
     if guess_count == 6:
