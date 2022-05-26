@@ -85,22 +85,25 @@ for kbRow in range(len(keyboard)):
 def update_board():
     numGuess = 0
 
+    keepGoing = True
+
     while numGuess < 6:
         word = []
         colors = []
 
-        if kbd.is_pressed('space'):
-
-            # list of 5 letters, can be lowercase - convert to function call
-            # word = ["C", "r", "A", "n", "E"]
-            #
-            # # list of 5 colors - convert to function call
-            # colors = ["green", "green", "yellow", "green", "green"]
+        if kbd.is_pressed('space') and keepGoing:
 
             word, colors = guesserfunctions.produce_guess()
 
             numGuess += 1
             time.sleep(0.25)
+
+            greenCount = 0
+            for c in colors:
+                if c == "green":
+                    greenCount += 1
+            if greenCount == 5:
+                keepGoing = False
 
         yield numGuess, word, colors
 
