@@ -69,7 +69,7 @@ def get_next_guess(words_to_guess_from, prev_guess):
 finished = 0
 
 for a in range(len(word_list)):
-    print(a, "of", len(word_list))
+    print(a+1, "of", len(word_list))
 
     green_letters = ["_", "_", "_", "_", "_"]
     yellow_letters = []
@@ -81,7 +81,7 @@ for a in range(len(word_list)):
     # actual_word = word_list[random.randint(0, len(word_list))]
     actual_word = word_list[a]
 
-    print("actual_word: ", actual_word)
+    print("actual -", actual_word)
 
     starting_word = "crane"
 
@@ -91,13 +91,10 @@ for a in range(len(word_list)):
     while guess_count < 6:
         guess_count += 1
 
-
-        print()
-        print("curr_guess: ", curr_guess)
-        print("guess_count: ", guess_count)
+        print("guess", guess_count, "-", curr_guess)
 
         if curr_guess == actual_word:
-            print("solved on guess:", guess_count)
+            print("solved on guess", guess_count)
             finished += 1
             break
 
@@ -169,11 +166,11 @@ for a in range(len(word_list)):
         print()
         print("didn't finish")
 
-
-    print("------------------")
     print()
+    print("------------------")
+
 
 print("Finished", finished, "out of", len(word_list), "within 6 guesses")
-print("Aacuracy:", (finished/len(word_list)))
+print("Accuracy:", (finished/len(word_list)))
 
 

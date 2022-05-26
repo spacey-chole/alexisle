@@ -58,11 +58,11 @@ import random as rd
 
 
 def processGuess(guessWord, correctWord):
-    print(correctWord)
-
-    for char in guessWord:
-        print(char, end="")
-    print()
+    # print(correctWord)
+    #
+    # for char in guessWord:
+    #     print(char, end="")
+    # print()
 
     # sets guess-word to your input
     # guessWord = input()
@@ -103,8 +103,8 @@ def processGuess(guessWord, correctWord):
             yellowIn.append(guessIndex)
             # print("added ", guessIndex, " to yellowIns")
 
-    print("green", greenIn)
-    print("yellow", yellowIn)
+    # print("green", greenIn)
+    # print("yellow", yellowIn)
 
     colorList = []
     for i in range(5):
