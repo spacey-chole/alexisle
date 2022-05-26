@@ -94,7 +94,6 @@ def produce_guess():
             green_letters[c] = curr_guess[c]
         elif letter_colors[c] == "yellow":
             yellow_letters[curr_guess[c]].append(c)
-            print(curr_guess[c], yellow_letters[curr_guess[c]])
         else:
             gray_letters.append(curr_guess[c])
 
@@ -173,6 +172,7 @@ def test_all_words():
         actual_word = word_list[a]
         print("actual -", actual_word)
 
+        dnf = True
         while guess_count < 6:
 
             produce_guess()
@@ -180,9 +180,10 @@ def test_all_words():
             if curr_guess == actual_word:
                 print("solved on guess", guess_count + 1)
                 finished += 1
+                dnf = False
                 break
 
-        if guess_count == 6:
+        if dnf:
             print()
             print("didn't finish")
 
