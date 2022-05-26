@@ -98,12 +98,10 @@ def update_board():
             numGuess += 1
             time.sleep(0.25)
 
-            greenCount = 0
+            keepGoing = False
             for c in colors:
-                if c == "green":
-                    greenCount += 1
-            if greenCount == 5:
-                keepGoing = False
+                if c == "yellow" or c == "gray":
+                    keepGoing = True
 
         yield numGuess, word, colors
 
