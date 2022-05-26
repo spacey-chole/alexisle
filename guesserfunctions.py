@@ -194,5 +194,5 @@ def test_all_words():
     print("Accuracy:", (finished / len(word_list)))
 
 
-test_all_words()
+# test_all_words()
 
